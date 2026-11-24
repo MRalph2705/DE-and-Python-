@@ -260,9 +260,18 @@
     return lines.join("\n");
   }
 
+  function progressNav(active) {
+    return h("div", { class: "subnav" }, [
+      h("a", { href: "#/tracker", class: active === "tracker" ? "on" : "", text: "Lesson ticks" }),
+      h("a", { href: "#/calendar", class: active === "calendar" ? "on" : "", text: "Schedule" })]);
+  }
+
   function pageTracker() {
     var root = h("div");
-    root.appendChild(h("h1", { text: "Tracker" }));
+    root.appendChild(h("h1", { text: "Progress" }));
+    root.appendChild(progressNav("tracker"));
+    root.appendChild(h("div", { class: "card" }, [h("h3", { text: "Days studied (last 28 days)" }), logStrip(28),
+      h("p", { class: "small mute", text: "F = full hour, M = minimum day. Tick today on the Today page." })]));
     var n = doneCount(), pct = Math.round(100 * n / Math.max(1, TOPICS.length));
     root.appendChild(h("div", { class: "card" }, [h("div", { class: "stat", text: n + " of " + TOPICS.length + " built lessons done (" + pct + "%)" }), bar(pct),
       h("p", { class: "small mute", text: "More lessons are added in batches. The full map has " + FLAT.length + " lessons." })]));
@@ -326,12 +335,13 @@
 
   function pageCalendar() {
     var root = h("div"), s = load();
-    root.appendChild(h("h1", { text: "Calendar" }));
+    root.appendChild(h("h1", { text: "Progress" }));
+    root.appendChild(progressNav("calendar"));
     var total = FLAT.length, built = TOPICS.length, done = doneCount(), expected = expectedNow();
     var target = Math.min(expected, built), behind = Math.max(0, target - done);
     var finish = dueDate(total - 1), n = today(), st = parse(s.start), el = Math.max(0, days(st, n));
     var verdict, vcls;
-    if (behind > 0) { verdict = "Behind by " + behind + (behind === 1 ? " lesson." : " lessons."); vcls = "late"; }
+    if (behind > 0) { verdict = behind + (behind === 1 ? " lesson" : " lessons") + " to catch up on. Do the next one."; vcls = ""; }
     else if (expected > built && done >= built) { verdict = "Caught up with everything built. More lessons are coming."; vcls = "ontime"; }
     else if (done > target) { verdict = "Ahead by " + (done - target) + (done - target === 1 ? " lesson." : " lessons."); vcls = "ontime"; }
     else { verdict = "On plan."; vcls = "ontime"; }
@@ -398,7 +408,14 @@
   function pageMethod() {
     var root = h("div"), src = SITE.sources || {};
     function srcText(k) { var v = src[k]; if (!v) return ""; return typeof v === "string" ? v : (v.title || "") + (v.note ? " - " + v.note : ""); }
-    root.appendChild(h("h1", { text: "Method" }));
+    root.appendChild(h("h1", { text: "Help and method" }));
+    root.appendChild(h("div", { class: "card" }, [h("h3", { text: "Where things are" }), h("ul", {}, [
+      h("li", {}, [h("a", { href: "#/today", text: "Today" }), ": what to do in your hour, the minimum day, the 15-minute rule, wins."]),
+      h("li", {}, [h("a", { href: "#/recall", text: "Recall" }), ": about 5 minutes of closed-book cards, spaced so old lessons come back. Then 10 minutes of writing code with python drill.py in the project folder."]),
+      h("li", {}, [h("a", { href: "#/topics", text: "Course" }), ": every lesson, in order."]),
+      h("li", {}, [h("a", { href: "#/genomics", text: "Genomics project" }), ": the project pages, milestones and the Python-block order."]),
+      h("li", {}, [h("a", { href: "#/tracker", text: "Progress" }), ": lesson ticks and the schedule. Export a backup of everything here."]),
+      h("li", {}, [h("a", { href: "#/genomics/stay", text: "Stay on track" }), ": the full guide for hard days."])])]));
     var blocks = [
       ["How every lesson is built", [
         "Step 1. Look at the picture.", "Step 2. Predict the answer on paper. Then check it.", "Step 3. Read the short explanation.",
@@ -433,18 +450,464 @@
     return root;
   }
 
+
+  // ---------- genomics project tab ----------
+
+  var GEN = window.GENOMICS || { order: [], pages: {} };
+  var BLOCKS = [
+    { id: "py-control" }, { id: "py-functions" }, { id: "py-dict-count" }, { id: "py-comprehensions" },
+    { id: "py-mutable-default" }, { id: "py-files" }, { id: "py-except-order" }, { id: "py-scripts" },
+    { id: "py-datetime" }, { id: "py-logging" }, { id: "pd-basics" }, { id: "pd-select" },
+    { id: "pd-groupby" }, { id: "pd-merge" }, { id: "pd-window" }, { id: "fc-baselines" }, { id: "fc-backtest" }
+  ];
+  var MILESTONES = [
+    ["m1", "M1  SQL half passes checks 1 to 4 and is on GitHub", "rough date: Tue 15 Dec"],
+    ["m2", "M2  Python blocks done up to lesson 3.5", "rough date: Fri 18 Dec"],
+    ["m3", "M3  Python half passes checks 5 to 9, pipeline runs", "rough date: Sun 10 Jan"],
+    ["m4", "M4  Check 10, README written, repo public, mock interview", "rough date: Sun 17 Jan"],
+    ["m5", "M5  My own second project", "rough date: Sun 31 Jan"]
+  ];
+  function genGet(k) { var s = load(); return !!(s.gen && s.gen[k]); }
+  function genSet(k, v) { var s = load(); if (!s.gen) s.gen = {}; if (v) s.gen[k] = true; else delete s.gen[k]; save(); }
+  function stepsDone(id) { var d = load().done[id]; return d && d.steps ? d.steps.filter(Boolean).length : 0; }
+  function dayIds() { return GEN.order.filter(function (id) { return GEN.pages[id].kind === "day"; }); }
+  function genCheck(key, label, extra, onChange) {
+    var cb = h("input", { type: "checkbox" });
+    cb.checked = genGet(key);
+    cb.addEventListener("change", function () { genSet(key, cb.checked); if (onChange) onChange(); });
+    return h("label", { class: "chk" }, [cb, h("span", {}, [label, extra ? h("span", { class: "mute small", text: "  " + extra }) : null])]);
+  }
+
+  function pageGenomicsHome() {
+    var root = h("div");
+    root.appendChild(h("h1", { text: "Genomics project" }));
+    root.appendChild(h("p", { class: "mute", text: "Build the demand and capacity pipeline for the NHS genomics job. Each hour: 25 minutes of Python block, then 35 minutes of project. You always do the next unticked item. There is no behind, only next." }));
+
+    var builtBlocks = BLOCKS.filter(function (b) { return b.id && byId[b.id]; });
+    var nextBlock = builtBlocks.filter(function (b) { return !isDone(b.id); })[0];
+    var days = dayIds();
+    var nextDay = days.filter(function (id) { return !genGet(id); })[0];
+
+    var nu = h("div", { class: "card" });
+    nu.appendChild(h("h2", { text: "Next up" }));
+    nu.appendChild(h("p", {}, [h("strong", { text: "Python block (25 min): " }),
+      nextBlock ? h("a", { href: "#/topic/" + nextBlock.id, text: byId[nextBlock.id].lessonNo + " " + byId[nextBlock.id].title }) :
+        "all the built lessons on this list are done. The next ones are being written: tell Claude."]));
+    nu.appendChild(h("p", {}, [h("strong", { text: "Project (35 min): " }),
+      nextDay ? h("a", { href: "#/genomics/" + nextDay, text: GEN.pages[nextDay].title }) :
+        "all written pages are done. The next ones are being written: tell Claude."]));
+    nu.appendChild(h("p", { class: "mute small" }, ["Low energy or only 20 minutes? Do the Python block and log it. That counts. Stuck for 15 minutes? ",
+      h("a", { href: "#/genomics/stay", text: "Stay on track, section 4" }), "."]));
+    root.appendChild(nu);
+
+    var prog = h("div", { class: "card" });
+    var bDone = builtBlocks.filter(function (b) { return isDone(b.id); }).length;
+    var dDone = days.filter(function (id) { return genGet(id); }).length;
+    var pb = h("p"), pd = h("p");
+    prog.appendChild(h("h2", { text: "Progress" }));
+    prog.appendChild(pb); prog.appendChild(bar(builtBlocks.length ? Math.round(100 * bDone / builtBlocks.length) : 0));
+    prog.appendChild(pd); prog.appendChild(bar(days.length ? Math.round(100 * dDone / days.length) : 0));
+    pb.textContent = "Python blocks: " + bDone + " of " + builtBlocks.length + " built lessons done (" + (BLOCKS.length - builtBlocks.length) + " more being written)";
+    pd.textContent = "Project pages: " + dDone + " of " + days.length + " written pages done (more being written)";
+    root.appendChild(prog);
+
+    root.appendChild(h("h2", { text: "Milestones" }));
+    var mc = h("div", { class: "card" });
+    MILESTONES.forEach(function (m) { mc.appendChild(genCheck(m[0], m[1], m[2])); });
+    mc.appendChild(h("p", { class: "mute small", text: "Dates move, the order does not. Missing a date is information, not failure: tell Claude and we re-plan." }));
+    root.appendChild(mc);
+
+    root.appendChild(h("h2", { text: "Python blocks (in order)" }));
+    root.appendChild(h("p", { class: "mute small" }, ["Two sittings per lesson: A to learn it, B to prove it from a blank page. A lesson counts as done here when all five steps are ticked on its page. ",
+      h("a", { href: "#/genomics/blocks", text: "How to do a lesson in 25 minutes" }), "."]));
+    var bl = h("div", { class: "card" });
+    BLOCKS.forEach(function (b, i) {
+      var t = b.id && byId[b.id];
+      var left = t ? h("a", { href: "#/topic/" + b.id, text: t.lessonNo + " " + t.title }) : h("span", { class: "mute", text: b.pending + " (being written)" });
+      var n = t ? stepsDone(b.id) : 0;
+      var tag = !t ? h("span", { class: "tag mute", text: "coming" }) :
+        h("span", { class: "tag " + (n === 5 ? "ok" : (n ? "" : "bad")), text: n === 5 ? "done" : (n + " of 5") });
+      bl.appendChild(h("div", { class: "row lrow" }, [h("span", { class: "lno", text: (i + 1) + "." }), h("span", { class: "grow" }, [left]), tag]));
+    });
+    root.appendChild(bl);
+
+    root.appendChild(h("h2", { text: "Project pages" }));
+    root.appendChild(h("p", { class: "mute small", text: "Each page has a PAUSE POINT about halfway, so one page is about two sittings. Tick a page when you have finished all of it. Pages from Day 15 onwards are still being written." }));
+    var pl = h("div", { class: "card" });
+    days.forEach(function (id) {
+      var row = h("div", { class: "row lrow" }, [
+        genCheck(id, "", ""),
+        h("span", { class: "grow" }, [h("a", { href: "#/genomics/" + id, text: GEN.pages[id].title })])]);
+      pl.appendChild(row);
+    });
+    root.appendChild(pl);
+
+    root.appendChild(h("h2", { text: "Guides" }));
+    var gc = h("div", { class: "card" });
+    ["stay", "blocks", "plan"].forEach(function (id) {
+      if (GEN.pages[id]) gc.appendChild(h("p", {}, [h("a", { href: "#/genomics/" + id, text: GEN.pages[id].title })]));
+    });
+    root.appendChild(gc);
+    return root;
+  }
+
+  function pageGenomics(sub) {
+    if (!sub) return pageGenomicsHome();
+    var p = GEN.pages[sub];
+    if (!p) return h("div", {}, [h("p", { text: "That page does not exist." }), h("a", { href: "#/genomics", text: "Back to the Genomics project" })]);
+    var root = h("div");
+    root.appendChild(h("a", { href: "#/genomics", text: "< Genomics project" }));
+    root.appendChild(h("h1", { text: p.title }));
+    if (p.kind === "day") root.appendChild(h("p", { class: "mute small", text: "File names in code style (such as notes/findings.py) are in your project folder, not on this site. Run commands in a terminal opened inside that folder." }));
+    root.appendChild(h("div", { class: "md", html: p.html })); // our own pre-rendered markdown (see dataeng-site-src/build_genomics.py)
+    if (p.kind === "day") {
+      root.appendChild(h("div", { class: "card" }, [genCheck(sub, "I have finished this page (both parts)", "")]));
+      var days = dayIds(), idx = days.indexOf(sub), nav = h("div", { class: "row" });
+      if (idx > 0) nav.appendChild(h("a", { class: "btn", href: "#/genomics/" + days[idx - 1], text: "< Previous" }));
+      if (idx < days.length - 1) nav.appendChild(h("a", { class: "btn", href: "#/genomics/" + days[idx + 1], text: "Next >" }));
+      root.appendChild(nav);
+    }
+    return root;
+  }
+
+
+  // ---------- daily log, wins, and the Today page ----------
+  function logMap() { var s = load(); if (!s.log) s.log = {}; return s.log; }
+  function logSet(d, v) { var l = logMap(); if (v) l[iso(d)] = v; else delete l[iso(d)]; save(); }
+  function streak() {
+    var l = logMap(), d = today(), n = 0;
+    if (!l[iso(d)]) d = addDays(d, -1);
+    while (l[iso(d)]) { n++; d = addDays(d, -1); }
+    return n;
+  }
+  function logStrip(count) {
+    var l = logMap(), wrap = h("div", { class: "strip", role: "img", "aria-label": "Study days over the last " + count + " days" });
+    for (var i = count - 1; i >= 0; i--) {
+      var d = addDays(today(), -i), v = l[iso(d)];
+      wrap.appendChild(h("span", { class: "dot " + (v || "none") + (i === 0 ? " now" : ""), title: fmt(d) + (v === "full" ? ": full hour" : v === "min" ? ": minimum day" : ": nothing logged"), text: v === "full" ? "F" : v === "min" ? "M" : "" }));
+    }
+    return wrap;
+  }
+  function copyButton(label, getText) {
+    var msg = h("span", { class: "mute small" });
+    var b = h("button", { text: label, onclick: function () {
+      var ok = false;
+      try { if (navigator.clipboard) { navigator.clipboard.writeText(getText()); ok = true; } } catch (e) { ok = false; }
+      msg.textContent = ok ? "Copied." : "Select the text and copy it by hand.";
+    } });
+    return h("span", {}, [b, " ", msg]);
+  }
+
+  function pageToday() {
+    var root = h("div"), GENP = (window.GENOMICS || { order: [], pages: {} });
+    root.appendChild(h("h1", { text: "Today" }));
+    root.appendChild(h("p", { class: "mute", text: fmt(today()) + ". Your hour is 2 to 3 pm. Do the next item. There is no behind, only next." }));
+
+    // what is next
+    var nextBlock = BLOCKS.filter(function (b) { return b.id && byId[b.id] && !isDone(b.id); })[0];
+    var dayList = GENP.order.filter(function (id) { return GENP.pages[id].kind === "day"; });
+    var nextDay = dayList.filter(function (id) { return !genGet(id); })[0];
+
+    // missed-yesterday notice
+    var l = logMap(), yKey = iso(addDays(today(), -1)), any = Object.keys(l).length > 0;
+    if (any && !l[yKey] && !l[iso(today())]) {
+      root.appendChild(h("div", { class: "callout amb" }, [h("strong", { text: "Yesterday was missed. That is fine. " }),
+        "No catch-up. Today is a minimum day: do 5 recall cards and write the progress line. The rule is never two days in a row."]));
+    }
+
+    var hour = h("div", { class: "card hour" });
+    hour.appendChild(h("h2", { text: "Your hour" }));
+    var ol = h("ol", { class: "steps" });
+    var rcc = rcCounts();
+    ol.appendChild(h("li", {}, [h("strong", { text: "Recall and write, 15 minutes. " }),
+      h("a", { href: "#/recall", text: rcc.total ? "Cards, about 5 minutes (" + rcc.due + " due, up to " + rcc.newLeft + " new)" : "Choose your recall lessons" }),
+      h("div", { class: "mute small", text: "Then about 10 minutes of writing: in the project folder run python drill.py. Cards keep old lessons from fading. The drill trains your hands to write code." })]));
+    ol.appendChild(h("li", {}, [h("strong", { text: "Python block, 20 minutes. " }),
+      nextBlock ? h("a", { href: "#/topic/" + nextBlock.id, text: "Next: " + byId[nextBlock.id].lessonNo + " " + byId[nextBlock.id].title }) : "The built lessons on the list are done. Tell Claude.",
+      h("div", { class: "mute small" }, ["Sitting A learns it. Sitting B proves it from a blank page the next day. ", h("a", { href: "#/genomics/blocks", text: "How a block works" }), "."])]));
+    ol.appendChild(h("li", {}, [h("strong", { text: "Project, 25 minutes. " }),
+      nextDay ? h("a", { href: "#/genomics/" + nextDay, text: "Next: " + GENP.pages[nextDay].title }) : "All written pages are done. Tell Claude.",
+      h("div", { class: "mute small", text: "Each page has a PAUSE POINT. If time runs out, stop there and write down where. Spend the last 2 minutes on one line in notes/progress.md: what you did and the first thing to do next time. Then tick today below." })]));
+    hour.appendChild(ol);
+    root.appendChild(hour);
+
+    // tick today
+    var tickCard = h("div", { class: "card" });
+    tickCard.appendChild(h("h2", { text: "Tick today" }));
+    var statusP = h("p", { class: "stat2" }), strip = h("div"), streakP = h("p", { class: "mute" });
+    function refreshLog() {
+      var v = logMap()[iso(today())];
+      statusP.textContent = v === "full" ? "Today: full hour done. Well done." : v === "min" ? "Today: minimum day done. That counts as a day." : "Today: not ticked yet.";
+      var n = streak();
+      streakP.textContent = "Streak: " + n + (n === 1 ? " day" : " days") + " in a row. Last 14 days below (F = full hour, M = minimum day).";
+      strip.textContent = ""; strip.appendChild(logStrip(14));
+    }
+    tickCard.appendChild(statusP);
+    tickCard.appendChild(h("div", { class: "row" }, [
+      h("button", { class: "pri", text: "I did the full hour", onclick: function () { logSet(today(), "full"); refreshLog(); } }),
+      h("button", { text: "I did a minimum day", onclick: function () { logSet(today(), "min"); refreshLog(); } }),
+      h("button", { text: "Undo", onclick: function () { logSet(today(), null); refreshLog(); } })]));
+    tickCard.appendChild(streakP); tickCard.appendChild(strip);
+    root.appendChild(tickCard); refreshLog();
+
+    // minimum day
+    var md = h("div", { class: "callout good big" });
+    md.appendChild(h("h2", { text: "MINIMUM DAY: never zero" }));
+    md.appendChild(h("p", { text: "Tired? Short of time? Do just this. It counts as a full day on your streak." }));
+    var ol2 = h("ol", { class: "steps" });
+    [[h("a", { href: "#/recall", text: "Do 5 recall cards" }), ". About 5 minutes. When you finish 5, the site ticks your minimum day for you."],
+     ["Write one line in notes/progress.md: what you did. About 1 minute."]].forEach(function (x) { ol2.appendChild(h("li", {}, x)); });
+    md.appendChild(ol2);
+    md.appendChild(h("p", { class: "mute small", text: "Got 10 more minutes? Run python drill.py. Got 20 more? Add the Python block. Got the whole hour? Do all three steps. But five cards and a line is a real day." }));
+    md.appendChild(h("p", {}, [h("strong", { text: "The rule: never miss two days in a row. " }),
+      "One missed day is normal. After a missed day, do a minimum day, not a catch-up day."]));
+    root.appendChild(md);
+
+    // stuck
+    var st = h("div", { class: "card" });
+    st.appendChild(h("h2", { text: "Stuck? The 15-minute rule" }));
+    st.appendChild(h("p", { class: "mute", text: "Hitting a wall is the work, not a sign you are bad at this. The plan is decided in advance so you do not have to decide while stuck." }));
+    var tbl = h("table");
+    [["0 to 5 min", "Read the error message slowly, out loud. The last line says what went wrong. Delete code until it works, then add back one line at a time."],
+     ["5 to 10 min", "Print what you are unsure about: print(x), print(type(x)), print(df.head())."],
+     ["10 to 15 min", "Open the first hint. Only the first."],
+     ["At 15 min", "STOP. Write a wall note (below). Switch to something else for the rest of the sitting. Send the note to Claude."]].forEach(function (r) {
+      tbl.appendChild(h("tr", {}, [h("td", {}, [h("strong", { text: r[0] })]), h("td", { text: r[1] })]));
+    });
+    st.appendChild(tbl);
+    var wall = "WALL, " + iso(today()) + ": I was trying to ______. I expected ______. I got ______ (paste the last error line).\nI already tried ______ and ______.";
+    st.appendChild(h("pre", { text: wall }));
+    st.appendChild(copyButton("Copy the wall note", function () { return wall; }));
+    st.appendChild(h("p", { class: "small mute" }, ["A wall you solve is a win. Write it below. ", h("a", { href: "#/genomics/stay", text: "Read the full Stay on track guide" }), "."]));
+    root.appendChild(st);
+
+    // wins
+    var wc = h("div", { class: "card" }), list = h("div");
+    wc.appendChild(h("h2", { text: "Wins" }));
+    wc.appendChild(h("p", { class: "mute small", text: "One line after each sitting: something you can do now that you could not do last week. Read these on a bad day." }));
+    var inp = h("input", { type: "text", "aria-label": "A win", placeholder: "For example: I wrote a ROW_NUMBER query without looking", style: "width:100%" });
+    function refreshWins() {
+      var w = load().wins || [], shown = w.slice().reverse();
+      list.textContent = "";
+      if (!shown.length) list.appendChild(h("p", { class: "mute small", text: "No wins yet. Your first one is coming." }));
+      shown.slice(0, 5).forEach(function (x) { list.appendChild(h("p", {}, [h("span", { class: "mute small", text: x.d + "  " }), x.t])); });
+      if (shown.length > 5) {
+        var det = h("details", {}, [h("summary", { text: "Show all " + shown.length })]);
+        shown.slice(5).forEach(function (x) { det.appendChild(h("p", {}, [h("span", { class: "mute small", text: x.d + "  " }), x.t])); });
+        list.appendChild(det);
+      }
+    }
+    function addWin() {
+      var t = inp.value.trim(); if (!t) return;
+      var s2 = load(); if (!s2.wins) s2.wins = []; s2.wins.push({ d: iso(today()), t: t }); save(); inp.value = ""; refreshWins();
+    }
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") addWin(); });
+    wc.appendChild(h("div", { class: "row" }, [h("span", { class: "grow" }, [inp]), h("button", { text: "Add win", onclick: addWin })]));
+    wc.appendChild(list); root.appendChild(wc); refreshWins();
+
+    // sunday
+    var sd = h("div", { class: "card" });
+    sd.appendChild(h("h2", { text: "Sunday review (10 minutes)" }));
+    var ol3 = h("ol", { class: "steps" });
+    ["How many days did I do something, out of 7? (Aim for 5, not 7.)", "What was my biggest wall, and did I solve it?", "What is the first thing I will do on Monday?"].forEach(function (x) { ol3.appendChild(h("li", { text: x })); });
+    sd.appendChild(ol3);
+    sd.appendChild(h("p", { class: "mute small", text: "Send the three answers to Claude in the chat. Or write \"missed it\" and the plan resets with no judgement." }));
+    root.appendChild(sd);
+
+    root.appendChild(h("p", {}, [h("a", { class: "btn", href: "#/genomics", text: "Genomics project" }), " ", h("a", { class: "btn", href: "#/topics", text: "Course map" }), " ", h("a", { class: "btn", href: "#/method", text: "Help" })]));
+    return root;
+  }
+
+  // ---------- recall: a daily 15-minute closed-book quiz, spaced by box ----------
+  var RC = window.RECALL || { lessons: [], cards: [] };
+  var BOX_DAYS = [1, 2, 4, 8, 16, 32];
+  var NEW_PER_DAY = 6, QUICK_MAX = 6, KINDS = { say: "Say it", predict: "Predict", code: "Code question", write: "Write it from a blank page" };
+  var rcTimer = null;
+  function rcState() {
+    var s = load();
+    if (!s.recall) s.recall = { cards: {}, sel: null, days: {}, done: {} };
+    if (!s.recall.cards) s.recall.cards = {}; if (!s.recall.days) s.recall.days = {}; if (!s.recall.done) s.recall.done = {};
+    if (!s.recall.sel) {
+      var sel = { core: true }, any = false;
+      TOPICS.forEach(function (t) { if (isDone(t.id)) { sel[t.id] = true; any = true; } });
+      if (!any) RC.lessons.forEach(function (l) { if (l.module === "Python core for data work") sel[l.id] = true; });
+      s.recall.sel = sel; save();
+    }
+    return s.recall;
+  }
+  function rcSelected() { var r = rcState(); return RC.cards.filter(function (c) { return c.k !== "write" && r.sel[c.l]; }); }
+  function rcCounts() {
+    var r = rcState(), t = iso(today()), sel = rcSelected(), due = 0, fresh = 0, strong = 0, seen = 0;
+    sel.forEach(function (c) {
+      var st = r.cards[c.id];
+      if (!st) fresh++; else { seen++; if (st.d <= t) due++; if (st.b >= 5) strong++; }
+    });
+    return { total: sel.length, due: due, fresh: fresh, strong: strong, seen: seen, newLeft: Math.max(0, NEW_PER_DAY - (r.days[t] || 0)) };
+  }
+  function rcBuild(more) {
+    var r = rcState(), t = iso(today()), sel = rcSelected();
+    var due = sel.filter(function (c) { var st = r.cards[c.id]; return st && st.d <= t; });
+    due.sort(function (a, b) { var x = r.cards[a.id], y = r.cards[b.id]; return x.b - y.b || (x.d < y.d ? -1 : x.d > y.d ? 1 : 0); });
+    var fresh = sel.filter(function (c) { return !r.cards[c.id]; });
+    var newBudget = Math.max(0, NEW_PER_DAY - (r.days[t] || 0)) + (more ? NEW_PER_DAY : 0);
+    var quick = due.filter(function (c) { return c.k !== "write"; }).slice(0, QUICK_MAX);
+    var freshQuick = fresh.filter(function (c) { return c.k !== "write"; }).slice(0, Math.min(newBudget, QUICK_MAX - quick.length));
+    quick = quick.concat(freshQuick);
+    return quick;
+  }
+  function rcGrade(card, grade) {
+    var r = rcState(), t = iso(today()), st = r.cards[card.id], isNew = !st;
+    var b = st ? st.b : 1;
+    if (grade === "got") b = Math.min(6, b + 1); else if (grade === "miss") b = 1;
+    var gap = grade === "got" ? BOX_DAYS[b - 1] : 1;
+    r.cards[card.id] = { b: b, d: iso(addDays(today(), gap)), n: (st ? st.n : 0) + 1 };
+    if (isNew) r.days[t] = (r.days[t] || 0) + 1;
+    r.done[t] = (r.done[t] || 0) + 1;
+    save();
+  }
+  function rcPre(txt) { return h("pre", { text: txt }); }
+
+  function pageRecall() {
+    var root = h("div");
+    root.appendChild(h("h1", { text: "Recall" }));
+    root.appendChild(h("p", { class: "mute", text: "About 5 minutes, books closed. Answer from memory first, then look, then mark yourself honestly. The effort of pulling it out of your head is what makes it stick." }));
+    var main = h("div"), deck = h("div");
+    root.appendChild(main); root.appendChild(deck);
+
+    function home() {
+      main.textContent = "";
+      var c = rcCounts(), r = rcState(), t = iso(today()), doneToday = r.done[t] || 0;
+      var card = h("div", { class: "card hour" });
+      card.appendChild(h("h2", { text: "Today's recall" }));
+      if (!c.total) {
+        card.appendChild(h("p", { text: "No lessons are chosen yet. Choose some below." }));
+      } else {
+        card.appendChild(h("p", { class: "stat2", text: c.due + " due to review. " + c.newLeft + " new cards allowed today." }));
+        card.appendChild(h("p", { class: "mute small", text: "Your quiz holds " + c.total + " cards. You have met " + c.seen + " of them. " + c.strong + " are strong (you got them right several times in a row)." + (doneToday ? " Today you have answered " + doneToday + "." : "") }));
+        var q = rcBuild(false);
+        if (q.length) card.appendChild(h("button", { class: "pri", text: doneToday ? "Do more cards" : "Start today's cards (about 5 minutes)", onclick: function () { start(false); } }));
+        else card.appendChild(h("div", {}, [h("p", { text: "Nothing is due and no new cards are left for today. Well done." }), h("button", { text: "Do 8 more new cards anyway", onclick: function () { start(true); } })]));
+      }
+      main.appendChild(card);
+      main.appendChild(h("details", { class: "rv" }, [h("summary", { text: "How this works" }), h("div", { class: "ans" }, [h("ul", {}, [
+        h("li", { text: "Each card asks a question. Answer it from memory first. Say it out loud, or type it. Then press Show answer." }),
+        h("li", { text: "Mark yourself: Got it, Nearly or Missed it. Be honest. A wrong mark only fools you." }),
+        h("li", { text: "A card you get right comes back later and later: 1 day, 2, 4, 8, 16, then 32. A card you miss comes back tomorrow." }),
+        h("li", { text: "A session is up to 6 quick cards, about 5 minutes. New cards are capped at 6 a day, and reviews come first, so a big list never floods you." }),
+        h("li", { text: "Cards test what you remember. Writing code is a different skill, so after the cards, open a terminal in the project folder and run python drill.py. That is one short writing task, checked for you. About 10 minutes." }),
+        h("li", { text: "Minimum day: 5 cards count as a day. Finish 5 and the site ticks your minimum day for you." })])])]));
+    }
+
+    function start(more) {
+      var queue = rcBuild(more).map(function (c) { return { c: c, again: false }; });
+      var idx = 0, tally = { got: 0, nearly: 0, miss: 0 }, began = Date.now(), answered = 0, ended = false;
+      if (rcTimer) clearInterval(rcTimer);
+      deck.textContent = "";
+      main.textContent = "";
+      var head = h("div", { class: "row" }), clock = h("span", { class: "mute small" }), body = h("div");
+      var prog = h("div", { class: "small mute" });
+      main.appendChild(head); main.appendChild(body);
+      head.appendChild(h("span", { class: "grow" }, [prog])); head.appendChild(clock);
+      head.appendChild(h("button", { text: "Stop for today", onclick: function () { finish(); } }));
+      function tick() {
+        if (!document.body.contains(clock)) { clearInterval(rcTimer); return; }
+        var sec = Math.floor((Date.now() - began) / 1000), m = Math.floor(sec / 60), x = sec % 60;
+        clock.textContent = m + ":" + (x < 10 ? "0" : "") + x + (sec >= 900 ? "  15 minutes. Finish this card, then stop." : "");
+      }
+      rcTimer = setInterval(tick, 1000); tick();
+      function show() {
+        if (idx >= queue.length) { finish(); return; }
+        var it = queue[idx], c = it.c, lesson = RC.lessons.filter(function (l) { return l.id === c.l; })[0] || {};
+        prog.textContent = "Card " + (idx + 1) + " of " + queue.length + (it.again ? " (second try)" : "");
+        body.textContent = "";
+        var cd = h("div", { class: "card" });
+        cd.appendChild(h("p", {}, [h("span", { class: "tag" + (c.k === "write" ? " sql" : ""), text: KINDS[c.k] }), " ", h("span", { class: "mute small", text: (lesson.no ? lesson.no + " " : "") + (lesson.title || "") })]));
+        if (c.k === "predict" || c.k === "code") cd.appendChild(rcPre(c.q));
+        else cd.appendChild(h("p", { class: "pw", text: c.q }));
+        if (c.k === "write") cd.appendChild(h("p", { class: "mute small", text: "Open an empty file and write it. No notes. About 5 minutes. Press Show answer when you have finished or when the time is up." }));
+        else cd.appendChild(h("p", { class: "mute small", text: "Say your answer out loud or write it before you look." }));
+        if (c.k === "write" && c.hint) cd.appendChild(reveal("Hint (only if stuck)", h("p", { text: c.hint })));
+        var area = h("div"), btn = h("button", { class: "pri", text: "Show answer" });
+        btn.addEventListener("click", function () {
+          area.textContent = ""; btn.remove();
+          area.appendChild(h("div", { class: "rv" }, [h("div", { class: "ans" }, [h("strong", { text: c.k === "write" ? "What to check: " : "Answer: " }), h("span", { class: "pw", text: c.a })])]));
+          area.appendChild(h("p", { class: "small mute", text: "How did you do?" }));
+          var row = h("div", { class: "row" });
+          [["got", "Got it", "pri"], ["nearly", "Nearly", ""], ["miss", "Missed it", ""]].forEach(function (g) {
+            row.appendChild(h("button", { class: g[2], text: g[1], onclick: function () {
+              if (!it.again) { rcGrade(c, g[0]); tally[g[0]]++; answered++; }
+              if (g[0] === "miss" && !it.again) queue.push({ c: c, again: true });
+              idx++; show();
+            } }));
+          });
+          area.appendChild(row);
+        });
+        cd.appendChild(btn); cd.appendChild(area);
+        body.appendChild(cd);
+      }
+      function finish() {
+        if (ended) return; ended = true; clearInterval(rcTimer);
+        var autoLogged = false;
+        if (answered >= 5 && !logMap()[iso(today())]) { logSet(today(), "min"); autoLogged = true; }
+        main.textContent = "";
+        var cd = h("div", { class: "callout good" });
+        cd.appendChild(h("h2", { text: answered ? "Recall done" : "Stopped" }));
+        cd.appendChild(h("p", { text: answered + " cards: " + tally.got + " got it, " + tally.nearly + " nearly, " + tally.miss + " missed." }));
+        if (autoLogged) cd.appendChild(h("p", { text: "That is a minimum day. It is ticked on Today for you." }));
+        else if (answered && answered < 5) cd.appendChild(h("p", { text: "Five cards make a minimum day. You are " + (5 - answered) + " away. Press Do more cards." }));
+        cd.appendChild(h("p", { class: "mute small", text: "Missed cards come back tomorrow." }));
+        cd.appendChild(h("p", {}, [h("strong", { text: "Next: writing. " }), "Open a terminal in the project folder and run ", h("code", { text: "python drill.py" }), ". About 10 minutes. Then your Python block."]));
+        main.appendChild(cd);
+        main.appendChild(h("div", { class: "row" }, [h("a", { class: "btn pri", href: "#/today", text: "Back to Today" }), h("button", { text: "Do more cards", onclick: function () { start(rcBuild(false).length === 0); } })]));
+        deckList();
+      }
+      show();
+    }
+
+    function deckList() {
+      deck.textContent = "";
+      var r = rcState(), c = rcCounts();
+      var cd = h("div", { class: "card" });
+      cd.appendChild(h("h2", { text: "What you are quizzed on" }));
+      cd.appendChild(h("p", { class: "mute small", text: "Tick the lessons you want in your quiz. Tick any you have forgotten, even ones you finished long ago. Cards are met in course order." }));
+      var row = h("div", { class: "row" });
+      row.appendChild(h("button", { text: "Only lessons I ticked as done", onclick: function () { var sel = { core: true }; TOPICS.forEach(function (t) { if (isDone(t.id)) sel[t.id] = true; }); r.sel = sel; save(); home(); deckList(); } }));
+      row.appendChild(h("button", { text: "All lessons", onclick: function () { var sel = {}; RC.lessons.forEach(function (l) { sel[l.id] = true; }); r.sel = sel; save(); home(); deckList(); } }));
+      row.appendChild(h("button", { text: "Clear", onclick: function () { r.sel = {}; save(); home(); deckList(); } }));
+      cd.appendChild(row);
+      var mod = null, box = null;
+      RC.lessons.forEach(function (l) {
+        if (l.module !== mod) { mod = l.module; cd.appendChild(h("h3", { text: mod })); box = h("div"); cd.appendChild(box); }
+        var n = RC.cards.filter(function (x) { return x.l === l.id; }).length;
+        var seen = RC.cards.filter(function (x) { return x.l === l.id && r.cards[x.id]; }).length;
+        var cb = h("input", { type: "checkbox" }); cb.checked = !!r.sel[l.id];
+        cb.addEventListener("change", function () { if (cb.checked) r.sel[l.id] = true; else delete r.sel[l.id]; save(); home(); });
+        box.appendChild(h("label", { class: "chk" }, [cb, h("span", {}, [(l.no === "Core" ? "" : l.no + " ") + l.title, h("span", { class: "mute small", text: "  " + n + " cards, " + seen + " met" })])]));
+      });
+      deck.appendChild(cd);
+    }
+    home(); deckList();
+    return root;
+  }
+
   // ---------- router ----------
   function render() {
-    var app = document.getElementById("app"), hash = location.hash || "#/topics";
+    if (rcTimer) { clearInterval(rcTimer); rcTimer = null; }
+    var app = document.getElementById("app"), hash = location.hash || "#/today";
     var parts = hash.replace(/^#\//, "").split("/"), tab = parts[0], page;
-    if (tab === "topic") page = pageTopic(parts[1]);
+    if (tab === "today") page = pageToday();
+    else if (tab === "topic") page = pageTopic(parts[1]);
     else if (tab === "tracker") page = pageTracker();
     else if (tab === "calendar") page = pageCalendar();
     else if (tab === "method") page = pageMethod();
-    else { tab = "topics"; page = pageSyllabus(); }
+    else if (tab === "recall") page = pageRecall();
+    else if (tab === "genomics") page = pageGenomics(parts[1]);
+    else if (tab === "topics") page = pageSyllabus();
+    else { tab = "today"; page = pageToday(); }
     app.textContent = ""; app.appendChild(page);
     Array.prototype.forEach.call(document.querySelectorAll("#nav a"), function (a) {
-      a.classList.toggle("on", a.getAttribute("data-tab") === (tab === "topic" ? "topics" : tab));
+      var group = { topic: "topics", topics: "topics", tracker: "progress", calendar: "progress", method: "help" }[tab] || tab;
+      a.classList.toggle("on", a.getAttribute("data-tab") === group);
     });
   }
   window.addEventListener("hashchange", function () { render(); window.scrollTo(0, 0); });

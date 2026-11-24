@@ -1,17 +1,17 @@
 window.SITE = {
  "title": "Data Engineering Study Site",
- "generated": "2026-10-31",
+ "generated": "2026-11-24",
  "defaultStart": "2026-10-27",
  "defaultPace": 4,
- "totalLessons": 108,
- "builtLessons": 25,
+ "totalLessons": 110,
+ "builtLessons": 32,
  "sources": {
   "B": "Data with Baraa (SQL Server). Read: his 12-chapter SQL roadmap and the project READMEs. Not watched.",
   "Z": "DataTalks.Club Data Engineering Zoomcamp (Alexey Grigorev). Read: the course page and module list.",
   "D": "Microsoft DP-700 Fabric Data Engineer. Read: the official skills-measured list.",
   "O": "Claude's own knowledge. Lessons are written here. They are not copies of any course."
  },
- "assumedNote": "SQL lessons assume these ideas from your earlier SQL days. They are planned as refresher lessons in module 3 and 4. Tell Claude if any is new.",
+ "assumedNote": "SQL lessons assume these ideas from your earlier SQL days. They are planned as refresher lessons in the T-SQL modules (modules 5 and 6). Tell Claude if any is new.",
  "milestones": [
   {
    "date": "2027-06-21",
@@ -180,91 +180,240 @@ window.SYLLABUS = [
   ]
  },
  {
-  "id": "M3",
+  "id": "M7",
   "no": 3,
-  "title": "T-SQL queries on SQL Server",
-  "basis": "B (roadmap chapters 1 to 8) plus O.",
+  "title": "pandas and data quality",
+  "basis": "O, D (duplicates, missing and late data).",
+  "lessons": [
+   {
+    "id": "pd-basics",
+    "no": "3.1",
+    "title": "DataFrames and Series",
+    "status": "built",
+    "src": "O"
+   },
+   {
+    "id": "pd-select",
+    "no": "3.2",
+    "title": "Select and filter",
+    "status": "built",
+    "src": "O"
+   },
+   {
+    "id": "pd-groupby",
+    "no": "3.3",
+    "title": "groupby and aggregates",
+    "status": "built",
+    "src": "O"
+   },
+   {
+    "id": "pd-merge",
+    "no": "3.4",
+    "title": "merge and join",
+    "status": "built",
+    "src": "O"
+   },
+   {
+    "id": "pd-window",
+    "no": "3.5",
+    "title": "rolling, shift, rank and cumsum",
+    "status": "built",
+    "src": "O"
+   },
+   {
+    "id": "fc-baselines",
+    "no": "3.6",
+    "title": "Forecast baselines",
+    "status": "built",
+    "src": ""
+   },
+   {
+    "id": "fc-backtest",
+    "no": "3.7",
+    "title": "Backtesting and error measures",
+    "status": "built",
+    "src": ""
+   },
+   {
+    "id": "pd-dtypes",
+    "no": "3.8",
+    "title": "dtypes and missing values",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pd-dedupe",
+    "no": "3.9",
+    "title": "Duplicates and late-arriving data",
+    "status": "planned",
+    "src": "D, O"
+   },
+   {
+    "id": "pd-parquet",
+    "no": "3.10",
+    "title": "Parquet files",
+    "status": "planned",
+    "src": "O"
+   }
+  ]
+ },
+ {
+  "id": "M6",
+  "no": 4,
+  "title": "Python and SQL Server together",
+  "basis": "O. No course found covers this. Includes the SQL Server set-up lesson, so you can connect from Python. Portfolio project 2 (demand and capacity) uses this module and the one before.",
   "lessons": [
    {
     "id": "sql-setup",
-    "no": "3.1",
+    "no": "4.1",
     "title": "Set up SQL Server Express and SSMS",
     "status": "planned",
     "src": "B ch.1"
    },
    {
+    "id": "pysql-connect",
+    "no": "4.2",
+    "title": "Connect with pyodbc",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-params",
+    "no": "4.3",
+    "title": "Parameterised queries",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-sqlalchemy",
+    "no": "4.4",
+    "title": "SQLAlchemy Core",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-pandas",
+    "no": "4.5",
+    "title": "pandas read_sql and to_sql",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-bulk",
+    "no": "4.6",
+    "title": "Bulk loads and fast_executemany",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-secrets",
+    "no": "4.7",
+    "title": "Config and secrets",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-upsert",
+    "no": "4.8",
+    "title": "Repeatable loads: MERGE and upserts",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-test-log",
+    "no": "4.9",
+    "title": "Logging and testing an ETL job",
+    "status": "planned",
+    "src": "O"
+   },
+   {
+    "id": "pysql-capstone",
+    "no": "4.10",
+    "title": "Capstone 1: Python ETL into your warehouse",
+    "status": "planned",
+    "src": "O"
+   }
+  ]
+ },
+ {
+  "id": "M3",
+  "no": 5,
+  "title": "T-SQL queries on SQL Server",
+  "basis": "B (roadmap chapters 1 to 8) plus O.",
+  "lessons": [
+   {
     "id": "sql-select",
-    "no": "3.2",
+    "no": "5.1",
     "title": "SELECT, WHERE, ORDER BY and TOP",
     "status": "planned",
     "src": "B ch.2, 5"
    },
    {
     "id": "sql-ddl-dml",
-    "no": "3.3",
+    "no": "5.2",
     "title": "CREATE, ALTER, DROP, INSERT, UPDATE and DELETE",
     "status": "planned",
     "src": "B ch.3, 4"
    },
    {
     "id": "sql-joins",
-    "no": "3.4",
+    "no": "5.3",
     "title": "Joins",
     "status": "planned",
     "src": "B ch.6"
    },
    {
     "id": "sql-set-ops",
-    "no": "3.5",
+    "no": "5.4",
     "title": "UNION, EXCEPT and INTERSECT",
     "status": "planned",
     "src": "B ch.6"
    },
    {
     "id": "sql-row-functions",
-    "no": "3.6",
+    "no": "5.5",
     "title": "String, date, NULL, CASE and CAST functions",
     "status": "planned",
     "src": "B ch.7"
    },
    {
     "id": "sql-aggregates",
-    "no": "3.7",
+    "no": "5.6",
     "title": "Aggregates and GROUP BY",
     "status": "planned",
     "src": "B ch.8"
    },
    {
     "id": "sql-where-having",
-    "no": "3.8",
+    "no": "5.7",
     "title": "WHERE, HAVING and the logical order",
     "status": "built",
     "src": ""
    },
    {
     "id": "sql-window-ranking",
-    "no": "3.9",
+    "no": "5.8",
     "title": "Ranking and value window functions",
     "status": "planned",
     "src": "B ch.8"
    },
    {
     "id": "sql-window-frames",
-    "no": "3.10",
+    "no": "5.9",
     "title": "Window frames and LAST_VALUE",
     "status": "built",
     "src": ""
    },
    {
     "id": "sql-percentile",
-    "no": "3.11",
+    "no": "5.10",
     "title": "PERCENTILE_CONT and PERCENTILE_DISC",
     "status": "built",
     "src": ""
    },
    {
     "id": "sql-rollup-grouping",
-    "no": "3.12",
+    "no": "5.11",
     "title": "ROLLUP and GROUPING",
     "status": "built",
     "src": ""
@@ -273,83 +422,83 @@ window.SYLLABUS = [
  },
  {
   "id": "M4",
-  "no": 4,
+  "no": 6,
   "title": "Advanced T-SQL and performance",
   "basis": "B (roadmap chapters 9 and 10) plus O.",
   "lessons": [
    {
     "id": "sql-subqueries",
-    "no": "4.1",
+    "no": "6.1",
     "title": "Subqueries",
     "status": "planned",
     "src": "B ch.9"
    },
    {
     "id": "sql-ctes",
-    "no": "4.2",
+    "no": "6.2",
     "title": "CTEs and recursive CTEs",
     "status": "planned",
     "src": "B ch.9"
    },
    {
     "id": "sql-views-temp",
-    "no": "4.3",
+    "no": "6.3",
     "title": "Views, temp tables and table variables",
     "status": "planned",
     "src": "B ch.9"
    },
    {
     "id": "sql-correlated-vs-window",
-    "no": "4.4",
+    "no": "6.4",
     "title": "Correlated subquery or window function",
     "status": "built",
     "src": ""
    },
    {
     "id": "sql-stored-procs",
-    "no": "4.5",
+    "no": "6.5",
     "title": "Stored procedures and triggers",
     "status": "planned",
     "src": "B ch.9"
    },
    {
     "id": "sql-indexes",
-    "no": "4.6",
+    "no": "6.6",
     "title": "Indexes: clustered, nonclustered, covering",
     "status": "planned",
     "src": "B ch.10"
    },
    {
     "id": "sql-exec-plans",
-    "no": "4.7",
+    "no": "6.7",
     "title": "Execution plans and STATISTICS IO and TIME",
     "status": "planned",
     "src": "B ch.10, O"
    },
    {
     "id": "sql-sargable",
-    "no": "4.8",
+    "no": "6.8",
     "title": "Writing queries an index can use",
     "status": "planned",
     "src": "O"
    },
    {
     "id": "sql-partitions",
-    "no": "4.9",
+    "no": "6.9",
     "title": "Partitioning",
     "status": "planned",
     "src": "B ch.10"
    },
    {
     "id": "sql-transactions",
-    "no": "4.10",
+    "no": "6.10",
     "title": "Transactions, locks and isolation",
     "status": "planned",
     "src": "O"
    },
    {
     "id": "sql-plan-cache",
-    "no": "4.11",
+    "no": "6.11",
     "title": "Parameter sniffing and the plan cache",
     "status": "planned",
     "src": "O"
@@ -358,207 +507,72 @@ window.SYLLABUS = [
  },
  {
   "id": "M5",
-  "no": 5,
+  "no": 7,
   "title": "Build a data warehouse in SQL Server",
   "basis": "B (the SQL Data Warehouse project: bronze, silver, gold; and the analytics project) plus O, D (loading patterns).",
   "lessons": [
    {
     "id": "dw-architecture",
-    "no": "5.1",
+    "no": "7.1",
     "title": "OLTP and OLAP, layers and the medallion design",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-setup",
-    "no": "5.2",
+    "no": "7.2",
     "title": "Project setup, naming rules and Git",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-bronze",
-    "no": "5.3",
+    "no": "7.3",
     "title": "Bronze: load raw files with BULK INSERT",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-silver",
-    "no": "5.4",
+    "no": "7.4",
     "title": "Silver: clean and standardise",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-gold",
-    "no": "5.5",
+    "no": "7.5",
     "title": "Gold: dimensions, facts and a star schema",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-quality",
-    "no": "5.6",
+    "no": "7.6",
     "title": "Data quality checks",
     "status": "planned",
     "src": "B, D"
    },
    {
     "id": "dw-docs",
-    "no": "5.7",
+    "no": "7.7",
     "title": "Data model docs and a data catalogue",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-analysis",
-    "no": "5.8",
+    "no": "7.8",
     "title": "Explore and analyse: the six stages",
     "status": "planned",
     "src": "B"
    },
    {
     "id": "dw-incremental",
-    "no": "5.9",
+    "no": "7.9",
     "title": "Full and incremental loads, late data",
     "status": "planned",
     "src": "D, O"
-   }
-  ]
- },
- {
-  "id": "M6",
-  "no": 6,
-  "title": "Python and SQL Server together",
-  "basis": "O. No course found covers this. Portfolio project 2.",
-  "lessons": [
-   {
-    "id": "pysql-connect",
-    "no": "6.1",
-    "title": "Connect with pyodbc",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-params",
-    "no": "6.2",
-    "title": "Parameterised queries",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-sqlalchemy",
-    "no": "6.3",
-    "title": "SQLAlchemy Core",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-pandas",
-    "no": "6.4",
-    "title": "pandas read_sql and to_sql",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-bulk",
-    "no": "6.5",
-    "title": "Bulk loads and fast_executemany",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-secrets",
-    "no": "6.6",
-    "title": "Config and secrets",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-upsert",
-    "no": "6.7",
-    "title": "Repeatable loads: MERGE and upserts",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-test-log",
-    "no": "6.8",
-    "title": "Logging and testing an ETL job",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pysql-capstone",
-    "no": "6.9",
-    "title": "Capstone 1: Python ETL into your warehouse",
-    "status": "planned",
-    "src": "O"
-   }
-  ]
- },
- {
-  "id": "M7",
-  "no": 7,
-  "title": "pandas and data quality",
-  "basis": "O, D (duplicates, missing and late data).",
-  "lessons": [
-   {
-    "id": "pd-basics",
-    "no": "7.1",
-    "title": "DataFrames and Series",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pd-select",
-    "no": "7.2",
-    "title": "Select and filter",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pd-groupby",
-    "no": "7.3",
-    "title": "groupby and aggregates",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pd-merge",
-    "no": "7.4",
-    "title": "merge and join",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pd-window",
-    "no": "7.5",
-    "title": "rolling, shift and rank",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pd-dtypes",
-    "no": "7.6",
-    "title": "dtypes and missing values",
-    "status": "planned",
-    "src": "O"
-   },
-   {
-    "id": "pd-dedupe",
-    "no": "7.7",
-    "title": "Duplicates and late-arriving data",
-    "status": "planned",
-    "src": "D, O"
-   },
-   {
-    "id": "pd-parquet",
-    "no": "7.8",
-    "title": "Parquet files",
-    "status": "planned",
-    "src": "O"
    }
   ]
  },
@@ -4026,6 +4040,1092 @@ window.TOPICS = [
   "num": 20
  },
  {
+  "id": "pd-basics",
+  "track": "Python",
+  "title": "DataFrames and Series",
+  "minutes": 45,
+  "summary": "Load a CSV into a DataFrame, read it, add a column, and do sums on whole columns with no loop.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 228\" role=\"img\" aria-label=\"A DataFrame is a table. One column of it is a Series.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">DataFrame = a table. Each column is a Series.</text><rect class=\"bxa\" x=\"0\" y=\"28\" width=\"140\" height=\"30\" rx=\"8\"/><text class=\"tx tb\" x=\"70\" y=\"48\" text-anchor=\"middle\" font-size=\"12\">referral_id</text><rect class=\"bx\" x=\"0\" y=\"62\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"70\" y=\"80\" text-anchor=\"middle\" font-size=\"11\">R1</text><rect class=\"bx\" x=\"0\" y=\"92\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"70\" y=\"110\" text-anchor=\"middle\" font-size=\"11\">R2</text><rect class=\"bx\" x=\"0\" y=\"122\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"70\" y=\"140\" text-anchor=\"middle\" font-size=\"11\">R3</text><rect class=\"bxg\" x=\"150\" y=\"28\" width=\"140\" height=\"30\" rx=\"8\"/><text class=\"tx tb\" x=\"220\" y=\"48\" text-anchor=\"middle\" font-size=\"12\">urgency</text><rect class=\"bxg\" x=\"150\" y=\"62\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"220\" y=\"80\" text-anchor=\"middle\" font-size=\"11\">urgent</text><rect class=\"bxg\" x=\"150\" y=\"92\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"220\" y=\"110\" text-anchor=\"middle\" font-size=\"11\">routine</text><rect class=\"bxg\" x=\"150\" y=\"122\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"220\" y=\"140\" text-anchor=\"middle\" font-size=\"11\">routine</text><rect class=\"bxa\" x=\"300\" y=\"28\" width=\"140\" height=\"30\" rx=\"8\"/><text class=\"tx tb\" x=\"370\" y=\"48\" text-anchor=\"middle\" font-size=\"12\">referred_date</text><rect class=\"bx\" x=\"300\" y=\"62\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"370\" y=\"80\" text-anchor=\"middle\" font-size=\"11\">2025-01-06</text><rect class=\"bx\" x=\"300\" y=\"92\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"370\" y=\"110\" text-anchor=\"middle\" font-size=\"11\">2025-01-07</text><rect class=\"bx\" x=\"300\" y=\"122\" width=\"140\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"370\" y=\"140\" text-anchor=\"middle\" font-size=\"11\">2025-01-09</text><text class=\"tx tb\" x=\"220\" y=\"172\" text-anchor=\"middle\" font-size=\"12\">df[&quot;urgency&quot;]  is one Series</text><text class=\"tx\" x=\"0\" y=\"196\" text-anchor=\"start\" font-size=\"12\">df[[&quot;referral_id&quot;, &quot;urgency&quot;]]  is a smaller DataFrame</text><text class=\"tx tb\" x=\"0\" y=\"214\" text-anchor=\"start\" font-size=\"12\">One operation on a Series works on every row. No loop.</text></svg>",
+   "caption": "A DataFrame is a table. One column is a Series. One operation covers every row."
+  },
+  "predict": {
+   "q": "import pandas as pd\ndf = pd.DataFrame({\"id\": [\"R1\", \"R2\"], \"n\": [3, 4]})\nprint(df[\"n\"] * 2)\nWhat does it print? Is there a loop?",
+   "reveal": "It prints a Series: 6 and 8, each with its row number (0 and 1) on the left, then Name: n, dtype: int64. There is no loop. pandas applies the multiply to every row for you."
+  },
+  "explain": [
+   {
+    "h": "What pandas gives you",
+    "p": [
+     "pandas holds a table in memory. You have used csv.DictReader and a loop for this. pandas does the same work in one line.",
+     "A DataFrame is the table. A Series is one column of it. Install with pip install pandas, then import pandas as pd.",
+     "The output on these pages comes from pandas 3.0.5. Older versions word some error messages a little differently. The ideas are the same."
+    ]
+   },
+   {
+    "h": "Read a CSV",
+    "p": [
+     "pd.read_csv('file.csv') reads a file. For text you already have in memory, wrap it: pd.read_csv(io.StringIO(text)). Lesson 1.9 showed StringIO.",
+     "pandas guesses each column type. A date column comes in as plain text unless you say so.",
+     "Say so with parse_dates=['referred_date']. Now date sums work.",
+     "Say how to read a column that looks like a number but is not one: dtype={'id': str}. Without it, the id 007 becomes the number 7. The zeros are lost for good."
+    ]
+   },
+   {
+    "h": "Look before you work",
+    "p": [
+     "df.shape gives (rows, columns). df.head() shows the first five rows. df.columns lists the names.",
+     "df['urgency'] is one column, a Series. df[['referral_id', 'urgency']] with two brackets is a smaller DataFrame.",
+     "df['urgency'].tolist() turns a Series into a plain Python list. Use it when you want to print or compare.",
+     "df['test_type'].value_counts() counts each value. It is the tally from lesson 1.6 in one call."
+    ]
+   },
+   {
+    "h": "Whole-column sums",
+    "p": [
+     "df['n'] * 2 doubles every row. df['a'] - df['b'] subtracts row by row. You never write the loop.",
+     "A new column is just an assignment: df['days'] = (df['sample'] - df['referred']).dt.days.",
+     "Subtracting two date columns gives time gaps. .dt.days turns each gap into a whole number of days.",
+     "A date that is missing is NaT. A number that is missing is NaN. A gap that touches a missing date is missing too. Counting them: df['x'].isna().sum().",
+     "mean(), sum(), min() and max() skip the missing values. So the mean of three days with one missing is the mean of the two that exist."
+    ]
+   },
+   {
+    "h": "Habits",
+    "p": [
+     "Check shape and head straight after every load. A wrong separator or a missing header shows up at once.",
+     "Say the types you want when you read. Do not trust the guess for dates and for ids."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Load, add a column, count",
+   "code": "import io\nimport pandas as pd\n\ntext = \"\"\"referral_id,test_type,urgency,referred_date,sample_received\nR1,Genome,urgent,2025-01-06,2025-01-08\nR2,Exome,routine,2025-01-07,\nR3,Panel,routine,2025-01-09,2025-01-13\nR4,Exome,urgent,2025-01-10,2025-01-11\n\"\"\"\ndf = pd.read_csv(io.StringIO(text), parse_dates=[\"referred_date\", \"sample_received\"])\n\nprint(df.shape)\nprint(df[\"urgency\"].tolist())\nprint(df[[\"referral_id\", \"urgency\"]])\n\ndf[\"days_to_sample\"] = (df[\"sample_received\"] - df[\"referred_date\"]).dt.days\nprint(df[[\"referral_id\", \"days_to_sample\"]])\nprint(df[\"days_to_sample\"].mean())\nprint(df[\"sample_received\"].isna().sum())\nprint(df[\"test_type\"].value_counts())",
+   "output": "(4, 5)\n['urgent', 'routine', 'routine', 'urgent']\n  referral_id  urgency\n0          R1   urgent\n1          R2  routine\n2          R3  routine\n3          R4   urgent\n  referral_id  days_to_sample\n0          R1             2.0\n1          R2             NaN\n2          R3             4.0\n3          R4             1.0\n2.3333333333333335\n1\ntest_type\nExome     2\nGenome    1\nPanel     1\nName: count, dtype: int64"
+  },
+  "qa": {
+   "q": "import io\nimport pandas as pd\ndf = pd.read_csv(io.StringIO(\"id\\n007\\n012\\n\"))\nprint(df[\"id\"].tolist())\nWhat prints? How do you keep the zeros?",
+   "a": "It prints [7, 12]. pandas read the ids as numbers, so the leading zeros are gone. Read with dtype={'id': str}. Then it prints ['007', '012']."
+  },
+  "build": {
+   "task": "From a blank page: read the text below with pandas. Parse both date columns. Add a column days_to_report that is the days between referred and reported. Print the mean of that column, then print how many reports are missing.\n\nid,referred,reported\nR1,2025-02-03,2025-02-20\nR2,2025-02-04,\nR3,2025-02-10,2025-02-24",
+   "hint": "pd.read_csv(io.StringIO(text), parse_dates=['referred', 'reported']). Then (df['reported'] - df['referred']).dt.days. Missing: df['reported'].isna().sum().",
+   "check": "The mean is 15.5 (17 days and 14 days; the missing one is skipped). The count of missing reports is 1."
+  },
+  "teach": "Explain in 5 sentences why pandas is faster to write than a loop over csv.DictReader, and name one thing a loop still does better.",
+  "mistakes": [
+   "Forgetting parse_dates, then subtracting. The columns are text, so you get TypeError.",
+   "Reading ids as numbers. 007 becomes 7. Use dtype={'id': str}.",
+   "Writing a loop over rows for a sum on a column. df['a'] - df['b'] already does it for every row."
+  ],
+  "selfCheck": [
+   {
+    "q": "What is the difference between a DataFrame and a Series?",
+    "a": "A DataFrame is a table. A Series is one column of it."
+   },
+   {
+    "q": "How do you read a date column so you can subtract it?",
+    "a": "parse_dates=['column_name'] in read_csv."
+   },
+   {
+    "q": "What does mean() do with missing values?",
+    "a": "It skips them."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. Load and add a column",
+    "task": "TEXT holds a CSV. Read it with pandas (wrap it in io.StringIO), parsing referred and sample as dates. Add days_to_sample. Print the mean, then print the days_to_sample column as a list.",
+    "hint": "import io, pandas as pd. Then pd.read_csv(io.StringIO(TEXT), parse_dates=['referred', 'sample']).",
+    "setup": "TEXT = \"\"\"id,test_type,urgency,referred,sample\nR1,Genome,urgent,2025-01-06,2025-01-08\nR2,Exome,routine,2025-01-07,2025-01-12\nR3,Panel,routine,2025-01-09,2025-01-13\nR4,Exome,urgent,2025-01-10,2025-01-11\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"referred\", \"sample\"])\ndf[\"days_to_sample\"] = (df[\"sample\"] - df[\"referred\"]).dt.days\nprint(df[\"days_to_sample\"].mean())\nprint(df[\"days_to_sample\"].tolist())",
+    "output": "3.0\n[2, 5, 4, 1]",
+    "lang": "python"
+   },
+   {
+    "title": "B. The dates are text",
+    "task": "This crashes. Say why. Fix it so it prints the days as a list.",
+    "hint": "The columns were read as text. Tell read_csv which columns are dates.",
+    "setup": "TEXT = \"\"\"id,test_type,urgency,referred,sample\nR1,Genome,urgent,2025-01-06,2025-01-08\nR2,Exome,routine,2025-01-07,2025-01-12\nR3,Panel,routine,2025-01-09,2025-01-13\nR4,Exome,urgent,2025-01-10,2025-01-11\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"referred\", \"sample\"])\ndf[\"days\"] = (df[\"sample\"] - df[\"referred\"]).dt.days\nprint(df[\"days\"].tolist())",
+    "output": "[2, 5, 4, 1]",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT))\ndf[\"days\"] = (df[\"sample\"] - df[\"referred\"]).dt.days\nprint(df[\"days\"].tolist())",
+    "brokenOutput": "TypeError: unsupported operand type(s) for -: 'str' and 'str'"
+   },
+   {
+    "title": "C. The vanishing zeros",
+    "task": "Say what this prints and what is wrong. Fix it so the ids keep their zeros.",
+    "hint": "Pass dtype={'id': str} to read_csv.",
+    "setup": "IDS = \"id\\n007\\n012\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(IDS), dtype={\"id\": str})\nprint(df[\"id\"].tolist())",
+    "output": "['007', '012']",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(IDS))\nprint(df[\"id\"].tolist())",
+    "brokenOutput": "[7, 12]"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-lists-tuples",
+    "title": "Lists and tuples",
+    "no": "1.3"
+   },
+   {
+    "id": "py-dict-count",
+    "title": "Count items with a dictionary",
+    "no": "1.6"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.1",
+  "num": 21
+ },
+ {
+  "id": "pd-select",
+  "track": "Python",
+  "title": "Select and filter",
+  "minutes": 50,
+  "summary": "Keep the rows you want with a True or False mask, clean text with .str, and change a copy without touching the original.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 214\" role=\"img\" aria-label=\"A comparison makes a True or False for each row. Rows marked True are kept.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3b\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">df[&quot;urgency&quot;] == &quot;urgent&quot;</text><text class=\"tx tm\" x=\"250\" y=\"16\" text-anchor=\"start\" font-size=\"11\">the mask</text><text class=\"tx tb\" x=\"340\" y=\"16\" text-anchor=\"start\" font-size=\"12\">df[mask]</text><rect class=\"bxg\" x=\"0\" y=\"28\" width=\"200\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"12\" y=\"47\" text-anchor=\"start\" font-size=\"12\">R1   urgent</text><rect class=\"bxg\" x=\"250\" y=\"28\" width=\"70\" height=\"28\" rx=\"8\"/><text class=\"tx tb\" x=\"285\" y=\"47\" text-anchor=\"middle\" font-size=\"12\">True</text><line class=\"ar\" x1=\"204\" y1=\"42\" x2=\"246\" y2=\"42\" marker-end=\"url(#m3b)\"/><rect class=\"bxg\" x=\"340\" y=\"28\" width=\"180\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"352\" y=\"47\" text-anchor=\"start\" font-size=\"12\">R1   urgent</text><rect class=\"bx\" x=\"0\" y=\"62\" width=\"200\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"12\" y=\"81\" text-anchor=\"start\" font-size=\"12\">R2   routine</text><rect class=\"bxa\" x=\"250\" y=\"62\" width=\"70\" height=\"28\" rx=\"8\"/><text class=\"tx tb\" x=\"285\" y=\"81\" text-anchor=\"middle\" font-size=\"12\">False</text><line class=\"ar\" x1=\"204\" y1=\"76\" x2=\"246\" y2=\"76\" marker-end=\"url(#m3b)\"/><text class=\"tx tm\" x=\"430\" y=\"81\" text-anchor=\"middle\" font-size=\"11\">dropped</text><rect class=\"bx\" x=\"0\" y=\"96\" width=\"200\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"12\" y=\"115\" text-anchor=\"start\" font-size=\"12\">R3   routine</text><rect class=\"bxa\" x=\"250\" y=\"96\" width=\"70\" height=\"28\" rx=\"8\"/><text class=\"tx tb\" x=\"285\" y=\"115\" text-anchor=\"middle\" font-size=\"12\">False</text><line class=\"ar\" x1=\"204\" y1=\"110\" x2=\"246\" y2=\"110\" marker-end=\"url(#m3b)\"/><text class=\"tx tm\" x=\"430\" y=\"115\" text-anchor=\"middle\" font-size=\"11\">dropped</text><rect class=\"bxg\" x=\"0\" y=\"130\" width=\"200\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"12\" y=\"149\" text-anchor=\"start\" font-size=\"12\">R4   urgent</text><rect class=\"bxg\" x=\"250\" y=\"130\" width=\"70\" height=\"28\" rx=\"8\"/><text class=\"tx tb\" x=\"285\" y=\"149\" text-anchor=\"middle\" font-size=\"12\">True</text><line class=\"ar\" x1=\"204\" y1=\"144\" x2=\"246\" y2=\"144\" marker-end=\"url(#m3b)\"/><rect class=\"bxg\" x=\"340\" y=\"130\" width=\"180\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"352\" y=\"149\" text-anchor=\"start\" font-size=\"12\">R4   urgent</text><text class=\"tx tb\" x=\"0\" y=\"182\" text-anchor=\"start\" font-size=\"12\">A mask is one True or False per row. True rows stay.</text><text class=\"tx\" x=\"0\" y=\"200\" text-anchor=\"start\" font-size=\"12\">Join masks with &amp;  |  ~  and put each test in brackets.</text></svg>",
+   "caption": "A comparison gives a True or False for each row. Rows marked True are kept."
+  },
+  "predict": {
+   "q": "import pandas as pd\ndf = pd.DataFrame({\"id\": [\"R1\", \"R2\", \"R3\"], \"urgency\": [\"urgent\", \"routine\", \"urgent\"]})\nprint(df[df[\"urgency\"] == \"urgent\"][\"id\"].tolist())\nWhat prints?",
+   "reveal": "It prints ['R1', 'R3']. The comparison makes a mask: True, False, True. df[mask] keeps the True rows. Then ['id'] picks one column."
+  },
+  "explain": [
+   {
+    "h": "The mask",
+    "p": [
+     "df['urgency'] == 'urgent' does not give one answer. It gives one True or False per row. That list is a mask.",
+     "df[mask] keeps the rows where the mask is True. This is the pandas WHERE.",
+     "Any comparison works: >, <, ==, !=. Comparing two date columns row by row works too: df['sample'] < df['referred'].",
+     "Give the mask a name, such as bad_order. The code then reads like a sentence."
+    ]
+   },
+   {
+    "h": "Combine masks",
+    "p": [
+     "Use & for and, | for or, ~ for not. Do not use the words and, or, not. They fail with ValueError on a Series.",
+     "Put every test in brackets: (df['a'] == 1) & (df['b'] == 2). Without brackets & binds first and you get an error (TypeError or ValueError, depending on your data).",
+     "df['x'].isin(['Genome', 'Exome']) is the pandas IN. ~df['x'].isin([...]) is NOT IN."
+    ]
+   },
+   {
+    "h": "loc: rows and columns together",
+    "p": [
+     "df.loc[mask, ['id', 'test_type']] keeps the masked rows and only those columns.",
+     "df.loc[mask, 'flag'] = 'late' changes only those rows of one column. loc is the safe way to write.",
+     "Why not df[mask]['flag'] = 'late'? That writes into a temporary copy. The real table does not change. pandas warns you (SettingWithCopyWarning in older versions, ChainedAssignmentError in pandas 3). The table still does not change.",
+     "So: read with df[mask]. Write with df.loc[mask, column] = value."
+    ]
+   },
+   {
+    "h": "Clean text with .str",
+    "p": [
+     "df['x'].str.strip() removes spaces at both ends. .str.lower(), .str.upper(), .str.title() change the case. .str.replace('-', ' ') swaps text.",
+     "These are the string methods from lesson 1.2, run on every row. You get a new Series. Assign it back: df['x'] = df['x'].str.strip().",
+     "Also .str.contains('abc') gives a mask, and .str.startswith('R').",
+     "Clean the text first, then filter. ' Genome ' and 'genome' are two different values until you do."
+    ]
+   },
+   {
+    "h": "Copy before you change",
+    "p": [
+     "good = df[~bad_order].copy() makes a separate table. You can add columns to good and df stays as it was.",
+     "Always end a filtered frame with .copy() when you plan to change it.",
+     "Keep the rejects too: rejects = df[bad_order]. Counting what you drop is part of data quality work."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Clean text, then filter",
+   "code": "import io\nimport pandas as pd\n\ntext = \"\"\"referral_id,test_type,urgency,referred_date,sample_received\nR1, Genome ,URGENT,2025-01-06,2025-01-08\nR2,exome,routine,2025-01-07,\nR3,Panel,Routine,2025-01-09,2025-01-13\nR4,Exome,urgent,2025-01-10,2025-01-11\nR5,Genome,routine,2025-01-13,2025-01-12\n\"\"\"\ndf = pd.read_csv(io.StringIO(text), parse_dates=[\"referred_date\", \"sample_received\"])\n\ndf[\"test_type\"] = df[\"test_type\"].str.strip().str.title()\ndf[\"urgency\"] = df[\"urgency\"].str.lower()\n\nurgent = df[df[\"urgency\"] == \"urgent\"]\nprint(urgent[\"referral_id\"].tolist())\n\nbad_order = df[\"sample_received\"] < df[\"referred_date\"]\nprint(df.loc[bad_order, \"referral_id\"].tolist())\n\nwanted = df[\"test_type\"].isin([\"Genome\", \"Exome\"]) & ~bad_order\nprint(df.loc[wanted, [\"referral_id\", \"test_type\"]])\n\ngood = df[~bad_order].copy()\ngood[\"flag\"] = \"ok\"\nprint(len(df), len(good))\nprint(df.columns.tolist())",
+   "output": "['R1', 'R4']\n['R5']\n  referral_id test_type\n0          R1    Genome\n1          R2     Exome\n3          R4     Exome\n5 4\n['referral_id', 'test_type', 'urgency', 'referred_date', 'sample_received']"
+  },
+  "qa": {
+   "q": "import pandas as pd\ndf = pd.DataFrame({\"a\": [1, 2, 3], \"b\": [3, 2, 1]})\nprint(df[df[\"a\"] > 1 & df[\"b\"] > 1])\nWhat happens? Why? How do you fix it?",
+   "a": "It raises ValueError: the truth value of a Series is ambiguous. & binds tighter than >, so Python works out 1 & df['b'] first and then chains the comparisons. With text columns the same slip gives TypeError. Put each test in brackets: df[(df['a'] > 1) & (df['b'] > 1)]."
+  },
+  "build": {
+   "task": "From a blank page: read the text below. Clean test_type (strip spaces, title case) and urgency (lower case). Parse both dates. Build a mask for rows where the sample came before the referral. Print the ids of those rows. Then print the ids of the urgent Genome or Exome rows that are not in that mask.\n\nid,test_type,urgency,referred,sample\nR1, Genome ,URGENT,2025-01-06,2025-01-08\nR2,exome,routine,2025-01-07,2025-01-12\nR3,Panel,Routine,2025-01-09,2025-01-13\nR4,EXOME,Urgent,2025-01-10,2025-01-11\nR5,Genome,urgent,2025-01-13,2025-01-12",
+   "hint": "bad = df['sample'] < df['referred']. Then df.loc[(df['urgency'] == 'urgent') & df['test_type'].isin(['Genome', 'Exome']) & ~bad, 'id'].tolist().",
+   "check": "The first print is ['R5']. The second is ['R1', 'R4']."
+  },
+  "teach": "Explain in 5 sentences what a mask is and why you put brackets round each test when you combine them.",
+  "mistakes": [
+   "Using and / or instead of & / |. You get ValueError: the truth value of a Series is ambiguous.",
+   "Forgetting brackets round each test. You get ValueError or TypeError, and the message does not mention brackets.",
+   "df[mask]['col'] = value. It changes a temporary copy. Use df.loc[mask, 'col'] = value.",
+   "Filtering before cleaning the text. ' Genome ' does not equal 'Genome'."
+  ],
+  "selfCheck": [
+   {
+    "q": "What does df[df['x'] == 1] do?",
+    "a": "It makes a True or False mask, one per row, and keeps the rows that are True."
+   },
+   {
+    "q": "Which three symbols join masks?",
+    "a": "& for and, | for or, ~ for not."
+   },
+   {
+    "q": "How do you change one column for some rows safely?",
+    "a": "df.loc[mask, 'column'] = value."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. Clean, then filter",
+    "task": "TEXT has messy text. Read it, parse the dates, strip and title-case test_type, lower-case urgency. Print the ids of rows that are urgent and a Genome or Exome test.",
+    "hint": "df['x'].str.strip().str.title(). Then a mask: (df['urgency'] == 'urgent') & df['test_type'].isin([...]).",
+    "setup": "TEXT = \"\"\"id,test_type,urgency,referred,sample\nR1, Genome ,URGENT,2025-01-06,2025-01-08\nR2,exome,routine,2025-01-07,2025-01-12\nR3,Panel,Routine,2025-01-09,2025-01-13\nR4,EXOME,Urgent,2025-01-10,2025-01-11\nR5,Genome,urgent,2025-01-13,2025-01-12\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"referred\", \"sample\"])\ndf[\"test_type\"] = df[\"test_type\"].str.strip().str.title()\ndf[\"urgency\"] = df[\"urgency\"].str.lower()\nmask = (df[\"urgency\"] == \"urgent\") & df[\"test_type\"].isin([\"Genome\", \"Exome\"])\nprint(df.loc[mask, \"id\"].tolist())",
+    "output": "['R1', 'R4', 'R5']",
+    "lang": "python"
+   },
+   {
+    "title": "B. Brackets",
+    "task": "This crashes. Fix it so it prints the ids where n is above 3 and below 8.",
+    "hint": "Put each test in its own brackets.",
+    "setup": "",
+    "sql": "import pandas as pd\n\ndf = pd.DataFrame({\"id\": [\"R1\", \"R2\", \"R3\"], \"n\": [1, 5, 9]})\nprint(df.loc[(df[\"n\"] > 3) & (df[\"n\"] < 8), \"id\"].tolist())",
+    "output": "['R2']",
+    "lang": "python",
+    "broken": "import pandas as pd\n\ndf = pd.DataFrame({\"id\": [\"R1\", \"R2\", \"R3\"], \"n\": [1, 5, 9]})\nprint(df[df[\"n\"] > 3 & df[\"n\"] < 8][\"id\"].tolist())",
+    "brokenOutput": "ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all()."
+   },
+   {
+    "title": "C. Write with loc",
+    "task": "The aim is a flag column that says reject for rows where the sample came before the referral. The code prints no flag column. Say why, then fix it so the rejected ids print.",
+    "hint": "df[bad]['flag'] writes into a temporary copy. Use df.loc[bad, 'flag'] = 'reject'.",
+    "setup": "TEXT = \"\"\"id,test_type,urgency,referred,sample\nR1, Genome ,URGENT,2025-01-06,2025-01-08\nR2,exome,routine,2025-01-07,2025-01-12\nR3,Panel,Routine,2025-01-09,2025-01-13\nR4,EXOME,Urgent,2025-01-10,2025-01-11\nR5,Genome,urgent,2025-01-13,2025-01-12\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"referred\", \"sample\"])\nbad = df[\"sample\"] < df[\"referred\"]\ndf.loc[bad, \"flag\"] = \"reject\"\nprint(df.loc[df[\"flag\"] == \"reject\", \"id\"].tolist())",
+    "output": "['R5']",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"referred\", \"sample\"])\nbad = df[\"sample\"] < df[\"referred\"]\ndf[bad][\"flag\"] = \"reject\"\nprint(df.columns.tolist())",
+    "brokenOutput": "['id', 'test_type', 'urgency', 'referred', 'sample']"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-strings",
+    "title": "Strings and f-strings",
+    "no": "1.2"
+   },
+   {
+    "id": "py-lists-tuples",
+    "title": "Lists and tuples",
+    "no": "1.3"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   },
+   {
+    "id": "pd-basics",
+    "title": "DataFrames and Series",
+    "no": "3.1"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.2",
+  "num": 22
+ },
+ {
+  "id": "pd-groupby",
+  "track": "Python",
+  "title": "groupby and aggregates",
+  "minutes": 50,
+  "summary": "Split a table into groups, get one summary per group, and put a group's number back on every row.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 210\" role=\"img\" aria-label=\"Rows are split into groups, each group gets one summary, and the summaries are combined into a small table.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3c\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">groupby = split, apply, combine</text><text class=\"tx tm\" x=\"0\" y=\"40\" text-anchor=\"start\" font-size=\"11\">1. Split</text><text class=\"tx tm\" x=\"190\" y=\"40\" text-anchor=\"start\" font-size=\"11\">2. Apply</text><text class=\"tx tm\" x=\"370\" y=\"40\" text-anchor=\"start\" font-size=\"11\">3. Combine</text><rect class=\"bxa\" x=\"0\" y=\"50\" width=\"160\" height=\"24\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"67\" text-anchor=\"start\" font-size=\"11\">R1  urgent  12</text><rect class=\"bxg\" x=\"0\" y=\"78\" width=\"160\" height=\"24\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"95\" text-anchor=\"start\" font-size=\"11\">R2  routine 30</text><rect class=\"bxa\" x=\"0\" y=\"106\" width=\"160\" height=\"24\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"123\" text-anchor=\"start\" font-size=\"11\">R3  urgent  20</text><rect class=\"bxg\" x=\"0\" y=\"134\" width=\"160\" height=\"24\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"151\" text-anchor=\"start\" font-size=\"11\">R4  routine 24</text><line class=\"ar\" x1=\"164\" y1=\"76\" x2=\"186\" y2=\"76\" marker-end=\"url(#m3c)\"/><line class=\"ar\" x1=\"164\" y1=\"132\" x2=\"186\" y2=\"132\" marker-end=\"url(#m3c)\"/><rect class=\"bxa\" x=\"190\" y=\"56\" width=\"150\" height=\"40\" rx=\"8\"/><text class=\"tx tb\" x=\"265\" y=\"80\" text-anchor=\"middle\" font-size=\"12\">urgent: mean 16</text><rect class=\"bxg\" x=\"190\" y=\"112\" width=\"150\" height=\"40\" rx=\"8\"/><text class=\"tx tb\" x=\"265\" y=\"136\" text-anchor=\"middle\" font-size=\"12\">routine: mean 27</text><line class=\"ar\" x1=\"344\" y1=\"76\" x2=\"366\" y2=\"90\" marker-end=\"url(#m3c)\"/><line class=\"ar\" x1=\"344\" y1=\"132\" x2=\"366\" y2=\"118\" marker-end=\"url(#m3c)\"/><rect class=\"bx\" x=\"370\" y=\"70\" width=\"140\" height=\"64\" rx=\"8\"/><text class=\"tx tm\" x=\"380\" y=\"90\" text-anchor=\"start\" font-size=\"11\">urgency  mean</text><text class=\"tx\" x=\"380\" y=\"108\" text-anchor=\"start\" font-size=\"12\">routine    27</text><text class=\"tx\" x=\"380\" y=\"126\" text-anchor=\"start\" font-size=\"12\">urgent     16</text><text class=\"tx tb\" x=\"0\" y=\"178\" text-anchor=\"start\" font-size=\"12\">One line does all three. The group column becomes the index.</text><text class=\"tx\" x=\"0\" y=\"196\" text-anchor=\"start\" font-size=\"12\">Add .reset_index() to turn it back into a normal column.</text></svg>",
+   "caption": "groupby splits the rows, applies one summary to each group, and combines the results."
+  },
+  "predict": {
+   "q": "import pandas as pd\ndf = pd.DataFrame({\"u\": [\"a\", \"b\", \"a\"], \"n\": [1, 2, 3]})\nprint(df.groupby(\"u\")[\"n\"].sum().to_dict())\nWhat prints?",
+   "reveal": "It prints {'a': 4, 'b': 2}. The rows for a are 1 and 3, so the sum is 4. The one row for b gives 2. The group names become the keys."
+  },
+  "explain": [
+   {
+    "h": "The idea: split, apply, combine",
+    "p": [
+     "In SQL you write GROUP BY. In pandas you write groupby. It does the same job.",
+     "pandas splits the rows into groups by a column, applies one summary to each group, and combines the answers into a small table.",
+     "df.groupby('urgency')['days'].mean() reads: for each urgency, take the days column, take the mean."
+    ]
+   },
+   {
+    "h": "Summaries you will use",
+    "p": [
+     "mean(), sum(), min(), max(), median(). Each skips missing values.",
+     "df.groupby('test_type').size() counts the rows in each group. It counts every row, even a row with a missing value.",
+     "df.groupby('test_type')['days'].count() counts only the rows where days is not missing. So size and count can differ. Use size to count rows. Use count to count filled values."
+    ]
+   },
+   {
+    "h": "Several summaries at once: agg",
+    "p": [
+     "df.groupby('test_type').agg(n=('referral_id', 'count'), mean_days=('days', 'mean')) makes one column per summary.",
+     "Each one is name=(column, function). You choose the name of the new column. The names make the result easy to read.",
+     "This is the pandas version of SELECT COUNT(...) AS n, AVG(...) AS mean_days ... GROUP BY."
+    ]
+   },
+   {
+    "h": "The group becomes the index",
+    "p": [
+     "After a groupby, the group column is no longer a column. It is the row label (the index). So summary['test_type'] gives KeyError.",
+     "Add .reset_index() to turn it back into a normal column. Do this whenever you will merge, sort by it or save the result.",
+     "Rows whose group value is missing are left out of the result. Check how many you have with df['col'].isna().sum()."
+    ]
+   },
+   {
+    "h": "transform: a group number on every row",
+    "p": [
+     "agg gives one row per group. transform gives one value per original row.",
+     "df['type_mean'] = df.groupby('test_type')['days'].transform('mean') puts each row's group mean next to the row.",
+     "Use it to compare a row to its group: df['days'] - df['type_mean']. This is the pandas version of AVG(...) OVER (PARTITION BY ...)."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Count, average, summarise, compare",
+   "code": "import io\nimport pandas as pd\n\ntext = \"\"\"referral_id,test_type,urgency,days_to_report\nR1,Genome,urgent,12\nR2,Exome,routine,30\nR3,Panel,routine,20\nR4,Exome,urgent,14\nR5,Genome,routine,\nR6,Exome,routine,26\n\"\"\"\ndf = pd.read_csv(io.StringIO(text))\n\nprint(df.groupby(\"urgency\")[\"days_to_report\"].mean())\nprint(df.groupby(\"test_type\").size())\nprint(df.groupby(\"test_type\")[\"days_to_report\"].count())\n\nsummary = df.groupby(\"test_type\").agg(\n    n=(\"referral_id\", \"count\"),\n    mean_days=(\"days_to_report\", \"mean\"),\n    worst=(\"days_to_report\", \"max\"),\n).reset_index()\nprint(summary)\n\ndf[\"type_mean\"] = df.groupby(\"test_type\")[\"days_to_report\"].transform(\"mean\")\nprint(df[[\"referral_id\", \"test_type\", \"days_to_report\", \"type_mean\"]])",
+   "output": "urgency\nroutine    25.333333\nurgent     13.000000\nName: days_to_report, dtype: float64\ntest_type\nExome     3\nGenome    2\nPanel     1\ndtype: int64\ntest_type\nExome     3\nGenome    1\nPanel     1\nName: days_to_report, dtype: int64\n  test_type  n  mean_days  worst\n0     Exome  3  23.333333   30.0\n1    Genome  2  12.000000   12.0\n2     Panel  1  20.000000   20.0\n  referral_id test_type  days_to_report  type_mean\n0          R1    Genome            12.0  12.000000\n1          R2     Exome            30.0  23.333333\n2          R3     Panel            20.0  20.000000\n3          R4     Exome            14.0  23.333333\n4          R5    Genome             NaN  12.000000\n5          R6     Exome            26.0  23.333333"
+  },
+  "qa": {
+   "q": "import pandas as pd\ndf = pd.DataFrame({\"t\": [\"a\", \"a\", \"b\"], \"d\": [1, None, 3]})\nprint(df.groupby(\"t\").size().to_dict())\nprint(df.groupby(\"t\")[\"d\"].count().to_dict())\nWhat prints? Why do they differ?",
+   "a": "It prints {'a': 2, 'b': 1} and then {'a': 1, 'b': 1}. size counts rows, so group a has two rows. count counts filled values, and one of a's values is missing, so it counts one."
+  },
+  "build": {
+   "task": "From a blank page: read the text below. For each urgency, print a table with the number of referrals (n) and the mean days (mean_days), with urgency as a normal column. Then add a column vs_avg: each row's days minus the mean of its urgency. Print vs_avg as a list.\n\nid,urgency,days\nR1,urgent,10\nR2,routine,30\nR3,urgent,20\nR4,routine,24\nR5,routine,",
+   "hint": "d.groupby('urgency').agg(n=('id', 'count'), mean_days=('days', 'mean')).reset_index(). For vs_avg: d['days'] - d.groupby('urgency')['days'].transform('mean').",
+   "check": "The table has routine 3 and 27.0, then urgent 2 and 15.0. vs_avg is [-5.0, 3.0, 5.0, -3.0, nan]. The missing day stays missing, and the other routine rows are compared with the mean of the two that exist (27)."
+  },
+  "teach": "Explain in 5 sentences the difference between agg and transform, and when you would use each.",
+  "mistakes": [
+   "Using count when you meant to count rows. count skips missing values. Use size.",
+   "Forgetting reset_index, then asking for the group column. You get KeyError.",
+   "Using a loop over groups. One groupby line does it.",
+   "Rows with a missing group value vanish from the result without a warning."
+  ],
+  "selfCheck": [
+   {
+    "q": "What are the three steps inside groupby?",
+    "a": "Split into groups, apply a summary to each, combine the results."
+   },
+   {
+    "q": "What is the difference between size and count?",
+    "a": "size counts rows. count counts values that are not missing."
+   },
+   {
+    "q": "What does reset_index do after a groupby?",
+    "a": "It turns the group column back into a normal column."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. Count and average",
+    "task": "TEXT holds a CSV. Read it. Print how many referrals each test_type has as a dict, then the mean days_to_report for each urgency as a dict, rounded to 1 place.",
+    "hint": "df.groupby('test_type').size().to_dict(). For the mean: df.groupby('urgency')['days_to_report'].mean().round(1).to_dict().",
+    "setup": "TEXT = \"\"\"referral_id,test_type,urgency,days_to_report\nR1,Genome,urgent,12\nR2,Exome,routine,30\nR3,Panel,routine,20\nR4,Exome,urgent,14\nR5,Genome,routine,\nR6,Exome,routine,26\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT))\nprint(df.groupby(\"test_type\").size().to_dict())\nprint(df.groupby(\"urgency\")[\"days_to_report\"].mean().round(1).to_dict())",
+    "output": "{'Exome': 3, 'Genome': 2, 'Panel': 1}\n{'routine': 25.3, 'urgent': 13.0}",
+    "lang": "python"
+   },
+   {
+    "title": "B. Genome has 2 referrals, not 1",
+    "task": "The aim is the number of referrals for each test type. It says Genome 1, but the file has 2 Genome rows. Say why. Fix it so it prints the right counts as a dict.",
+    "hint": "count skips missing values. One Genome row has no days_to_report. Count rows with size.",
+    "setup": "TEXT = \"\"\"referral_id,test_type,urgency,days_to_report\nR1,Genome,urgent,12\nR2,Exome,routine,30\nR3,Panel,routine,20\nR4,Exome,urgent,14\nR5,Genome,routine,\nR6,Exome,routine,26\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT))\nprint(df.groupby(\"test_type\").size().to_dict())",
+    "output": "{'Exome': 3, 'Genome': 2, 'Panel': 1}",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT))\nprint(df.groupby(\"test_type\")[\"days_to_report\"].count())",
+    "brokenOutput": "test_type\nExome     3\nGenome    1\nPanel     1\nName: days_to_report, dtype: int64"
+   },
+   {
+    "title": "C. The vanished column",
+    "task": "This crashes. Say why. Fix it so it prints the test types as a list.",
+    "hint": "After groupby, the group is the index and not a column. reset_index() makes it a column again.",
+    "setup": "TEXT = \"\"\"referral_id,test_type,urgency,days_to_report\nR1,Genome,urgent,12\nR2,Exome,routine,30\nR3,Panel,routine,20\nR4,Exome,urgent,14\nR5,Genome,routine,\nR6,Exome,routine,26\n\"\"\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT))\nsummary = df.groupby(\"test_type\")[\"days_to_report\"].mean().reset_index()\nprint(summary[\"test_type\"].tolist())",
+    "output": "['Exome', 'Genome', 'Panel']",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT))\nsummary = df.groupby(\"test_type\")[\"days_to_report\"].mean()\nprint(summary[\"test_type\"].tolist())",
+    "brokenOutput": "KeyError: 'test_type'"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   },
+   {
+    "id": "pd-basics",
+    "title": "DataFrames and Series",
+    "no": "3.1"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.3",
+  "num": 23
+ },
+ {
+  "id": "pd-merge",
+  "track": "Python",
+  "title": "merge and join",
+  "minutes": 50,
+  "summary": "Combine two tables on a key, choose which rows to keep, and check the row count so a bad join cannot slip through.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 222\" role=\"img\" aria-label=\"A left merge keeps every referral week. A week with no capacity row gets NaN.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3d\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">left merge: keep every row of the left table</text><text class=\"tx tm\" x=\"0\" y=\"40\" text-anchor=\"start\" font-size=\"11\">referrals</text><text class=\"tx tm\" x=\"180\" y=\"40\" text-anchor=\"start\" font-size=\"11\">capacity</text><text class=\"tx tm\" x=\"360\" y=\"40\" text-anchor=\"start\" font-size=\"11\">result</text><rect class=\"bx\" x=\"0\" y=\"48\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"66\" text-anchor=\"start\" font-size=\"12\">wk 1   101</text><rect class=\"bxg\" x=\"180\" y=\"48\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"190\" y=\"66\" text-anchor=\"start\" font-size=\"12\">wk 1   95</text><rect class=\"bxg\" x=\"360\" y=\"48\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"370\" y=\"66\" text-anchor=\"start\" font-size=\"12\">wk 1  101  95</text><rect class=\"bx\" x=\"0\" y=\"78\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"96\" text-anchor=\"start\" font-size=\"12\">wk 2   99</text><rect class=\"bxg\" x=\"180\" y=\"78\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"190\" y=\"96\" text-anchor=\"start\" font-size=\"12\">wk 2   95</text><rect class=\"bxg\" x=\"360\" y=\"78\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"370\" y=\"96\" text-anchor=\"start\" font-size=\"12\">wk 2  99  95</text><rect class=\"bx\" x=\"0\" y=\"108\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"126\" text-anchor=\"start\" font-size=\"12\">wk 3   90</text><rect class=\"bxg\" x=\"180\" y=\"108\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"190\" y=\"126\" text-anchor=\"start\" font-size=\"12\">wk 3   100</text><rect class=\"bxg\" x=\"360\" y=\"108\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"370\" y=\"126\" text-anchor=\"start\" font-size=\"12\">wk 3  90  100</text><rect class=\"bx\" x=\"0\" y=\"138\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"10\" y=\"156\" text-anchor=\"start\" font-size=\"12\">wk 4   85</text><rect class=\"bx\" x=\"180\" y=\"138\" width=\"150\" height=\"26\" rx=\"8\" stroke-dasharray=\"5 4\"/><text class=\"tx tm\" x=\"190\" y=\"156\" text-anchor=\"start\" font-size=\"11\">no row for wk 4</text><rect class=\"bxa\" x=\"360\" y=\"138\" width=\"150\" height=\"26\" rx=\"8\"/><text class=\"tx tb\" x=\"370\" y=\"156\" text-anchor=\"start\" font-size=\"12\">wk 4  85  NaN</text><text class=\"tx tb\" x=\"0\" y=\"190\" text-anchor=\"start\" font-size=\"12\">Row in referrals but not in capacity: kept, with NaN. Nothing is lost.</text><text class=\"tx\" x=\"0\" y=\"208\" text-anchor=\"start\" font-size=\"12\">Duplicate weeks in capacity would copy the referral row. Check the row count.</text></svg>",
+   "caption": "A left merge keeps every referral week. A week with no capacity row gets NaN."
+  },
+  "predict": {
+   "q": "import pandas as pd\na = pd.DataFrame({\"k\": [1, 2, 3], \"x\": [10, 20, 30]})\nb = pd.DataFrame({\"k\": [1, 2], \"y\": [5, 6]})\nprint(len(a.merge(b, on=\"k\", how=\"left\")), len(a.merge(b, on=\"k\")))\nWhat prints?",
+   "reveal": "It prints 3 2. A left merge keeps all three rows of a (key 3 gets NaN for y). The default is an inner merge, which keeps only the keys that are in both, so two rows."
+  },
+  "explain": [
+   {
+    "h": "What a merge is",
+    "p": [
+     "A merge is a JOIN. a.merge(b, on='week') matches rows in a and b that have the same week.",
+     "The column you match on is the key. If the key has a different name in each table, use left_on='a_col', right_on='b_col'.",
+     "Columns with the same name in both tables (other than the key) get _x and _y added. Use suffixes=('_ref', '_cap') to choose better ones."
+    ]
+   },
+   {
+    "h": "Which rows survive: how",
+    "p": [
+     "how='inner' (the default): only keys in both tables.",
+     "how='left': every row of the left table. No match gives NaN on the right side. This is the one you will use most. It means you never lose a row you meant to keep.",
+     "how='outer': every key from either table.",
+     "A missing match is not an error. It is a silent NaN. Always count them: both['capacity'].isna().sum()."
+    ]
+   },
+   {
+    "h": "Check the join did what you meant",
+    "p": [
+     "validate='one_to_one' (or 'many_to_one') makes pandas raise MergeError if the keys are not as unique as you said. Use it every time.",
+     "indicator=True adds a column _merge that says both, left_only or right_only. value_counts() on it is a quick audit.",
+     "Print len(before) and len(after). For a left merge the row count must not change. If it grew, the right table has a duplicate key."
+    ]
+   },
+   {
+    "h": "The traps",
+    "p": [
+     "Duplicate keys multiply rows. If the right table has week 1 twice, the left row for week 1 appears twice, and every sum on that table is now wrong. No error is raised unless you used validate.",
+     "Fix a duplicate with drop_duplicates('week') on the right table (it keeps the first row for each week). A later lesson (duplicates and late-arriving data) goes deeper.",
+     "The key must have the same type in both tables. A date read as text will not match a date read as a date. pandas raises ValueError. Parse both with parse_dates.",
+     "The key must also match in value. ' Genome' and 'Genome' do not match. Clean text first (lesson 3.2)."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Left merge, audit, and a duplicate that grows the table",
+   "code": "import io\nimport pandas as pd\n\nref_text = \"\"\"week,referrals\n2025-01-06,101\n2025-01-13,99\n2025-01-20,90\n2025-01-27,85\n\"\"\"\ncap_text = \"\"\"week,capacity\n2025-01-06,95\n2025-01-13,95\n2025-01-20,100\n\"\"\"\nref = pd.read_csv(io.StringIO(ref_text), parse_dates=[\"week\"])\ncap = pd.read_csv(io.StringIO(cap_text), parse_dates=[\"week\"])\n\nboth = ref.merge(cap, on=\"week\", how=\"left\", validate=\"one_to_one\")\nprint(both)\nprint(both[\"capacity\"].isna().sum())\n\ninner = ref.merge(cap, on=\"week\", how=\"inner\")\nprint(len(ref), len(inner))\n\ncheck = ref.merge(cap, on=\"week\", how=\"outer\", indicator=True)\nprint(check[\"_merge\"].value_counts())\n\ndup = pd.concat([cap, cap.iloc[[0]]], ignore_index=True)\nblown = ref.merge(dup, on=\"week\", how=\"left\")\nprint(len(ref), len(blown))",
+   "output": "        week  referrals  capacity\n0 2025-01-06        101      95.0\n1 2025-01-13         99      95.0\n2 2025-01-20         90     100.0\n3 2025-01-27         85       NaN\n1\n4 3\n_merge\nboth          3\nleft_only     1\nright_only    0\nName: count, dtype: int64\n4 5"
+  },
+  "qa": {
+   "q": "ref has 4 rows. cap has 4 rows, and week 1 appears twice in cap.\nrows = ref.merge(cap, on=\"week\", how=\"left\")\nHow many rows does rows have? How do you make pandas stop you?",
+   "a": "It has 5 rows: the week 1 referral row is copied once for each match in cap. Add validate='many_to_one' (or 'one_to_one'). Then pandas raises MergeError instead of quietly copying the row."
+  },
+  "build": {
+   "task": "From a blank page: read the two texts below. Merge them so every referral week stays, and make pandas check that capacity has one row per week. Add a column over that is True when referrals are above capacity. Print how many weeks are over, how many weeks have no capacity, and the number of rows.\n\nreferrals: week,referrals / 2025-03-03,80 / 2025-03-10,104 / 2025-03-17,97 / 2025-03-24,110\ncapacity: week,capacity / 2025-03-03,100 / 2025-03-10,100 / 2025-03-17,100",
+   "hint": "a.merge(b, on='week', how='left', validate='one_to_one'). Then x['over'] = x['referrals'] > x['capacity']. Count with x['over'].sum() and x['capacity'].isna().sum().",
+   "check": "Over: 1. No capacity: 1. Rows: 4. Look at the last week: its capacity is missing, so over is False. That False means 'cannot tell', not 'fine'. It is why you count the missing ones separately."
+  },
+  "teach": "Explain in 5 sentences why a left merge can quietly give you more rows than you started with, and how validate stops it.",
+  "mistakes": [
+   "Merging without checking the row count. A duplicate key quietly copies rows.",
+   "Merging a date read as text with a real date. ValueError. Parse both with parse_dates.",
+   "Reading a False from a comparison with NaN as 'fine'. A missing value compares False. Count the missing ones.",
+   "Using the default inner merge and losing rows you wanted to keep."
+  ],
+  "selfCheck": [
+   {
+    "q": "Which how keeps every row of the left table?",
+    "a": "how='left'."
+   },
+   {
+    "q": "What does validate='one_to_one' do?",
+    "a": "It raises MergeError if either table has a repeated key."
+   },
+   {
+    "q": "After a left merge the table has more rows than before. What is the likely cause?",
+    "a": "The right table has a duplicate key."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. Left merge and a gap",
+    "task": "REF and CAP are CSV text. Read both with the week parsed as a date. Merge so every referral week stays, and check capacity has one row per week. Add gap (referrals minus capacity). Print the row count and the number of missing capacities, then gap as a list.",
+    "hint": "ref.merge(cap, on='week', how='left', validate='one_to_one'). Missing: m['capacity'].isna().sum().",
+    "setup": "REF = \"week,referrals\\n2025-01-06,101\\n2025-01-13,99\\n2025-01-20,90\\n2025-01-27,85\\n\"\nCAP = \"week,capacity\\n2025-01-06,95\\n2025-01-13,95\\n2025-01-20,100\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nref = pd.read_csv(io.StringIO(REF), parse_dates=[\"week\"])\ncap = pd.read_csv(io.StringIO(CAP), parse_dates=[\"week\"])\nm = ref.merge(cap, on=\"week\", how=\"left\", validate=\"one_to_one\")\nm[\"gap\"] = m[\"referrals\"] - m[\"capacity\"]\nprint(len(m), m[\"capacity\"].isna().sum())\nprint(m[\"gap\"].tolist())",
+    "output": "4 1\n[6.0, 4.0, -10.0, nan]",
+    "lang": "python"
+   },
+   {
+    "title": "B. The extra row",
+    "task": "The referrals have 4 rows, but the merged table has 5. Say why. Fix it so the merge has 4 rows and would raise an error if a key repeated again.",
+    "hint": "Week 1 appears twice in CAP. Drop the repeat with drop_duplicates('week'), then merge with validate.",
+    "setup": "REF = \"week,referrals\\n2025-01-06,101\\n2025-01-13,99\\n2025-01-20,90\\n2025-01-27,85\\n\"\nCAP = \"week,capacity\\n2025-01-06,95\\n2025-01-13,95\\n2025-01-20,100\\n2025-01-06,95\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nref = pd.read_csv(io.StringIO(REF), parse_dates=[\"week\"])\ncap = pd.read_csv(io.StringIO(CAP), parse_dates=[\"week\"]).drop_duplicates(\"week\")\nm = ref.merge(cap, on=\"week\", how=\"left\", validate=\"one_to_one\")\nprint(len(ref), len(m))",
+    "output": "4 4",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\nref = pd.read_csv(io.StringIO(REF), parse_dates=[\"week\"])\ncap = pd.read_csv(io.StringIO(CAP), parse_dates=[\"week\"])\nm = ref.merge(cap, on=\"week\", how=\"left\")\nprint(len(ref), len(m))",
+    "brokenOutput": "4 5"
+   },
+   {
+    "title": "C. Text meets date",
+    "task": "This crashes. Say why. Fix it so it prints the row count.",
+    "hint": "One table has week as text and the other has it as a date. Parse both.",
+    "setup": "REF = \"week,referrals\\n2025-01-06,101\\n2025-01-13,99\\n2025-01-20,90\\n2025-01-27,85\\n\"\nCAP = \"week,capacity\\n2025-01-06,95\\n2025-01-13,95\\n2025-01-20,100\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nref = pd.read_csv(io.StringIO(REF), parse_dates=[\"week\"])\ncap = pd.read_csv(io.StringIO(CAP), parse_dates=[\"week\"])\nm = ref.merge(cap, on=\"week\", how=\"left\")\nprint(len(m))",
+    "output": "4",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\nref = pd.read_csv(io.StringIO(REF))\ncap = pd.read_csv(io.StringIO(CAP), parse_dates=[\"week\"])\nm = ref.merge(cap, on=\"week\", how=\"left\")\nprint(len(m))",
+    "brokenOutput": "ValueError: You are trying to merge on str and datetime64[us] columns for key 'week'. If you wish to proceed you should use pd.concat"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-strings",
+    "title": "Strings and f-strings",
+    "no": "1.2"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   },
+   {
+    "id": "pd-basics",
+    "title": "DataFrames and Series",
+    "no": "3.1"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.4",
+  "num": 24
+ },
+ {
+  "id": "pd-window",
+  "track": "Python",
+  "title": "rolling, shift, rank and cumsum",
+  "minutes": 50,
+  "summary": "Compare a row with the rows before it: last week's value, a rolling average, a running total, and a rank. Learn how to do it without peeking at the answer.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 238\" role=\"img\" aria-label=\"The shift column holds last week&#x27;s value in each row. The average column uses only earlier weeks.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3e\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">shift moves the column down one row</text><text class=\"tx tm\" x=\"0\" y=\"38\" text-anchor=\"start\" font-size=\"11\">week</text><text class=\"tx tm\" x=\"80\" y=\"38\" text-anchor=\"start\" font-size=\"11\">referrals</text><text class=\"tx tm\" x=\"190\" y=\"38\" text-anchor=\"start\" font-size=\"11\">shift(1)</text><text class=\"tx tm\" x=\"300\" y=\"38\" text-anchor=\"start\" font-size=\"11\">avg of 3 before</text><rect class=\"bx\" x=\"0\" y=\"46\" width=\"70\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"8\" y=\"60\" text-anchor=\"start\" font-size=\"11\">wk 1</text><rect class=\"bx\" x=\"80\" y=\"46\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"60\" text-anchor=\"start\" font-size=\"11\">101</text><rect class=\"bx\" x=\"190\" y=\"46\" width=\"100\" height=\"20\" rx=\"8\" stroke-dasharray=\"5 4\"/><text class=\"tx tm\" x=\"200\" y=\"60\" text-anchor=\"start\" font-size=\"11\">NaN</text><rect class=\"bx\" x=\"300\" y=\"46\" width=\"130\" height=\"20\" rx=\"8\" stroke-dasharray=\"5 4\"/><text class=\"tx tm\" x=\"310\" y=\"60\" text-anchor=\"start\" font-size=\"11\">NaN</text><rect class=\"bx\" x=\"0\" y=\"70\" width=\"70\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"8\" y=\"84\" text-anchor=\"start\" font-size=\"11\">wk 2</text><rect class=\"bx\" x=\"80\" y=\"70\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"84\" text-anchor=\"start\" font-size=\"11\">99</text><rect class=\"bxa\" x=\"190\" y=\"70\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"200\" y=\"84\" text-anchor=\"start\" font-size=\"11\">101</text><rect class=\"bx\" x=\"300\" y=\"70\" width=\"130\" height=\"20\" rx=\"8\" stroke-dasharray=\"5 4\"/><text class=\"tx tm\" x=\"310\" y=\"84\" text-anchor=\"start\" font-size=\"11\">NaN</text><rect class=\"bx\" x=\"0\" y=\"94\" width=\"70\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"8\" y=\"108\" text-anchor=\"start\" font-size=\"11\">wk 3</text><rect class=\"bx\" x=\"80\" y=\"94\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"108\" text-anchor=\"start\" font-size=\"11\">90</text><rect class=\"bxa\" x=\"190\" y=\"94\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"200\" y=\"108\" text-anchor=\"start\" font-size=\"11\">99</text><rect class=\"bx\" x=\"300\" y=\"94\" width=\"130\" height=\"20\" rx=\"8\" stroke-dasharray=\"5 4\"/><text class=\"tx tm\" x=\"310\" y=\"108\" text-anchor=\"start\" font-size=\"11\">NaN</text><rect class=\"bx\" x=\"0\" y=\"118\" width=\"70\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"8\" y=\"132\" text-anchor=\"start\" font-size=\"11\">wk 4</text><rect class=\"bx\" x=\"80\" y=\"118\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"132\" text-anchor=\"start\" font-size=\"11\">85</text><rect class=\"bxa\" x=\"190\" y=\"118\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"200\" y=\"132\" text-anchor=\"start\" font-size=\"11\">90</text><rect class=\"bxg\" x=\"300\" y=\"118\" width=\"130\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"310\" y=\"132\" text-anchor=\"start\" font-size=\"11\">96.7</text><rect class=\"bx\" x=\"0\" y=\"142\" width=\"70\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"8\" y=\"156\" text-anchor=\"start\" font-size=\"11\">wk 5</text><rect class=\"bx\" x=\"80\" y=\"142\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"156\" text-anchor=\"start\" font-size=\"11\">92</text><rect class=\"bxa\" x=\"190\" y=\"142\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"200\" y=\"156\" text-anchor=\"start\" font-size=\"11\">85</text><rect class=\"bxg\" x=\"300\" y=\"142\" width=\"130\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"310\" y=\"156\" text-anchor=\"start\" font-size=\"11\">91.3</text><rect class=\"bx\" x=\"0\" y=\"166\" width=\"70\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"8\" y=\"180\" text-anchor=\"start\" font-size=\"11\">wk 6</text><rect class=\"bx\" x=\"80\" y=\"166\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"180\" text-anchor=\"start\" font-size=\"11\">88</text><rect class=\"bxa\" x=\"190\" y=\"166\" width=\"100\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"200\" y=\"180\" text-anchor=\"start\" font-size=\"11\">92</text><rect class=\"bxg\" x=\"300\" y=\"166\" width=\"130\" height=\"20\" rx=\"8\"/><text class=\"tx\" x=\"310\" y=\"180\" text-anchor=\"start\" font-size=\"11\">89.0</text><text class=\"tx tb\" x=\"0\" y=\"206\" text-anchor=\"start\" font-size=\"12\">Week 4&#x27;s forecast (96.7) uses weeks 1 to 3 only. It never sees week 4.</text><text class=\"tx\" x=\"0\" y=\"224\" text-anchor=\"start\" font-size=\"12\">Sort by date first. shift and rolling go by row order, not by date.</text></svg>",
+   "caption": "shift(1) brings last week's value into this row. A forecast must only use earlier rows."
+  },
+  "predict": {
+   "q": "import pandas as pd\ns = pd.Series([10, 20, 40])\nprint(s.shift(1).tolist())\nprint(s.cumsum().tolist())\nWhat prints?",
+   "reveal": "It prints [nan, 10.0, 20.0] and then [10, 30, 70]. shift(1) moves each value down one row, so the first row has nothing before it (NaN). cumsum is the running total."
+  },
+  "explain": [
+   {
+    "h": "Sort first. Always.",
+    "p": [
+     "These tools work by row order, not by date. If the rows are not in date order, 'last week' is whatever row sits above.",
+     "df = df.sort_values('week') before anything else. Do it in the same step that loads the data.",
+     "There is no error if you forget. You just get a wrong answer."
+    ]
+   },
+   {
+    "h": "shift and diff: the row before",
+    "p": [
+     "df['x'].shift(1) is the value from one row above. shift(2) is two rows above. The first rows have nothing above them, so they are NaN.",
+     "df['x'].diff() is this row minus the row above. It is the change since last week.",
+     "A missing value is not zero. Leave the NaN or fill it on purpose."
+    ]
+   },
+   {
+    "h": "rolling: a moving window",
+    "p": [
+     "df['x'].rolling(3).mean() is the mean of this row and the two rows above it. The first two rows are NaN because there are not three values yet.",
+     "min_periods=1 lets it start earlier, with fewer values. Use it only if a shorter average is honest for your case.",
+     "Other summaries work the same way: .sum(), .max(), .std()."
+    ]
+   },
+   {
+    "h": "The trap: peeking at the answer",
+    "p": [
+     "rolling(3).mean() on week 4 includes week 4. If you use it as a forecast for week 4, you used the answer to make the guess. It always looks too good. This is called leakage.",
+     "The fix: shift(1) first, then rolling. df['x'].shift(1).rolling(3).mean() is the mean of the three weeks before this one.",
+     "Ask of every forecast column: does this row use anything from its own week or later?"
+    ]
+   },
+   {
+    "h": "cumsum and rank",
+    "p": [
+     "df['x'].cumsum() is the running total. df['x'].cumsum() on the weekly referrals gives the total so far.",
+     "df['x'].rank(ascending=False, method='min') gives 1 to the biggest. method='min' gives tied values the same, lowest rank. Without ascending=False, 1 is the smallest.",
+     "Do it per group by putting groupby first: df.groupby('test_type')['x'].cumsum(). This is the pandas version of SUM(...) OVER (PARTITION BY ... ORDER BY ...)."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Shift, change, rolling average, running total, rank",
+   "code": "import io\nimport pandas as pd\n\ntext = \"\"\"week,referrals\n2025-01-06,101\n2025-01-13,99\n2025-01-20,90\n2025-01-27,85\n2025-02-03,92\n2025-02-10,88\n\"\"\"\ndf = pd.read_csv(io.StringIO(text), parse_dates=[\"week\"]).sort_values(\"week\")\n\nprint(df[\"referrals\"].shift(1).tolist())\nprint(df[\"referrals\"].diff().tolist())\nprint(df[\"referrals\"].rolling(3).mean().round(1).tolist())\nprint(df[\"referrals\"].shift(1).rolling(3).mean().round(1).tolist())\nprint(df[\"referrals\"].cumsum().tolist())\nprint(df[\"referrals\"].rank(ascending=False, method=\"min\").tolist())",
+   "output": "[nan, 101.0, 99.0, 90.0, 85.0, 92.0]\n[nan, -2.0, -9.0, -5.0, 7.0, -4.0]\n[nan, nan, 96.7, 91.3, 89.0, 88.3]\n[nan, nan, nan, 96.7, 91.3, 89.0]\n[101, 200, 290, 375, 467, 555]\n[1.0, 2.0, 4.0, 6.0, 3.0, 5.0]"
+  },
+  "qa": {
+   "q": "import pandas as pd\ns = pd.Series([100, 80, 90, 120])\nprint(s.rolling(2).mean().tolist())\nprint(s.shift(1).rolling(2).mean().tolist())\nWhat prints? Which one can be a forecast?",
+   "a": "It prints [nan, 90.0, 85.0, 105.0] and then [nan, nan, 90.0, 85.0]. Only the second can be a forecast: its value in row 3 is the mean of rows 1 and 2, which are earlier. The first one's row 3 includes row 3 itself."
+  },
+  "build": {
+   "task": "From a blank page: read the text below and sort it by week. Make a column forecast: the mean of the three weeks before each week. Make a column miss: how far the real number was from the forecast (always positive). Print the forecast list rounded to 2 places, then the mean miss over the weeks that have one.\n\nweek,n / 2025-03-03,50 / 2025-03-10,54 / 2025-03-17,52 / 2025-03-24,60 / 2025-03-31,58 / 2025-04-07,62",
+   "hint": "d['n'].shift(1).rolling(3).mean(). Then (d['n'] - d['forecast']).abs(). Mean skips NaN by itself.",
+   "check": "The forecast list is [nan, nan, nan, 52.0, 55.33, 56.67]. The mean miss is 5.333333333333333. If your first forecast is not NaN in the first three rows, you used the week itself."
+  },
+  "teach": "Explain in 5 sentences what leakage is in a forecast, and show with shift how to avoid it.",
+  "mistakes": [
+   "Using shift or rolling on data that is not sorted by date. There is no error, just wrong numbers.",
+   "Forecasting with rolling(3).mean() without shift(1). The week itself is in the average.",
+   "Reading rank 1 as the smallest. Use ascending=False for 'biggest is 1'.",
+   "Treating the NaN in the first rows as zero."
+  ],
+  "selfCheck": [
+   {
+    "q": "What does shift(1) do?",
+    "a": "It moves each value down one row, so each row holds the value from the row above."
+   },
+   {
+    "q": "Why shift(1) before rolling for a forecast?",
+    "a": "So the average uses only earlier weeks and not the week being forecast."
+   },
+   {
+    "q": "What must you do before using shift or rolling on weekly data?",
+    "a": "Sort by date."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. Change and average",
+    "task": "TEXT is weekly referrals. Read it, parse the week and sort by week. Print the change from the previous week as a list, then the mean of the 3 weeks before each week as a list, rounded to 1 place.",
+    "hint": "df['referrals'].diff().tolist(). For the average: df['referrals'].shift(1).rolling(3).mean().round(1).tolist().",
+    "setup": "TEXT = \"week,referrals\\n2025-01-06,101\\n2025-01-13,99\\n2025-01-20,90\\n2025-01-27,85\\n2025-02-03,92\\n2025-02-10,88\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"week\"]).sort_values(\"week\")\nprint(df[\"referrals\"].diff().tolist())\nprint(df[\"referrals\"].shift(1).rolling(3).mean().round(1).tolist())",
+    "output": "[nan, -2.0, -9.0, -5.0, 7.0, -4.0]\n[nan, nan, nan, 96.7, 91.3, 89.0]",
+    "lang": "python"
+   },
+   {
+    "title": "B. A forecast that peeks",
+    "task": "This is meant to be a forecast made from the 3 weeks before each week. It is not. Say why. Fix it so the forecast for each week uses only earlier weeks.",
+    "hint": "rolling(3) includes the current row. Move the column down one row first with shift(1).",
+    "setup": "TEXT = \"week,referrals\\n2025-01-06,101\\n2025-01-13,99\\n2025-01-20,90\\n2025-01-27,85\\n2025-02-03,92\\n2025-02-10,88\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"week\"]).sort_values(\"week\")\ndf[\"forecast\"] = df[\"referrals\"].shift(1).rolling(3).mean()\nprint(df[\"forecast\"].round(1).tolist())",
+    "output": "[nan, nan, nan, 96.7, 91.3, 89.0]",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"week\"]).sort_values(\"week\")\ndf[\"forecast\"] = df[\"referrals\"].rolling(3).mean()\nprint(df[\"forecast\"].round(1).tolist())",
+    "brokenOutput": "[nan, nan, 96.7, 91.3, 89.0, 88.3]"
+   },
+   {
+    "title": "C. Last week is the wrong week",
+    "task": "The rows are not in date order. The week of 6 Jan should have nothing before it, but the output gives it a value. Say why. Fix it.",
+    "hint": "shift goes by row order. Sort by week first.",
+    "setup": "TEXT = \"week,referrals\\n2025-01-20,90\\n2025-01-06,101\\n2025-01-13,99\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"week\"]).sort_values(\"week\")\nprint(df[\"referrals\"].shift(1).tolist())",
+    "output": "[nan, 101.0, 99.0]",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\ndf = pd.read_csv(io.StringIO(TEXT), parse_dates=[\"week\"])\nprint(df[\"referrals\"].shift(1).tolist())",
+    "brokenOutput": "[nan, 90.0, 101.0]"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-lists-tuples",
+    "title": "Lists and tuples",
+    "no": "1.3"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   },
+   {
+    "id": "pd-basics",
+    "title": "DataFrames and Series",
+    "no": "3.1"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.5",
+  "num": 25
+ },
+ {
+  "id": "fc-baselines",
+  "track": "Python",
+  "title": "Forecast baselines",
+  "minutes": 45,
+  "summary": "Build the three simple forecasts every real model must beat: last value, rolling average and same-point-last-cycle. Check none of them peeks at the answer.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 210\" role=\"img\" aria-label=\"A row of eight weeks of referrals. Week 9 is forecast three ways, each using only earlier weeks.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3f\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">Three baselines for week 9 (the real value is 108)</text><rect class=\"bx\" x=\"0\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"28\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">100</text><text class=\"tx tm\" x=\"28\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 1</text><rect class=\"bx\" x=\"62\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"90\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">120</text><text class=\"tx tm\" x=\"90\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 2</text><rect class=\"bx\" x=\"124\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"152\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">90</text><text class=\"tx tm\" x=\"152\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 3</text><rect class=\"bx\" x=\"186\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"214\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">110</text><text class=\"tx tm\" x=\"214\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 4</text><rect class=\"bxa\" x=\"248\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"276\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">104</text><text class=\"tx tm\" x=\"276\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 5</text><rect class=\"bx\" x=\"310\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"338\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">126</text><text class=\"tx tm\" x=\"338\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 6</text><rect class=\"bx\" x=\"372\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"400\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">94</text><text class=\"tx tm\" x=\"400\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 7</text><rect class=\"bxg\" x=\"434\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\"/><text class=\"tx\" x=\"462\" y=\"49\" text-anchor=\"middle\" font-size=\"12\">116</text><text class=\"tx tm\" x=\"462\" y=\"72\" text-anchor=\"middle\" font-size=\"10\">wk 8</text><rect class=\"bx\" x=\"496\" y=\"30\" width=\"56\" height=\"28\" rx=\"8\" stroke-dasharray=\"5 4\"/><text class=\"tx tm\" x=\"524\" y=\"49\" text-anchor=\"middle\" font-size=\"11\">wk 9</text><text class=\"tx tb\" x=\"0\" y=\"106\" text-anchor=\"start\" font-size=\"12\">naive: last week = 116</text><text class=\"tx tb\" x=\"0\" y=\"128\" text-anchor=\"start\" font-size=\"12\">average of last 3 weeks (6, 7, 8) = 112</text><text class=\"tx tb\" x=\"0\" y=\"150\" text-anchor=\"start\" font-size=\"12\">seasonal naive: same week one cycle back (wk 5) = 104</text><text class=\"tx\" x=\"0\" y=\"178\" text-anchor=\"start\" font-size=\"12\">Each one uses only weeks before week 9. Nothing from week 9.</text><text class=\"tx\" x=\"0\" y=\"196\" text-anchor=\"start\" font-size=\"12\">Your clever model has to beat these, or it is not worth using.</text></svg>",
+   "caption": "Three simple forecasts for week 9. Each uses only the weeks before it."
+  },
+  "predict": {
+   "q": "import pandas as pd\ns = pd.Series([10, 20, 30, 40, 50, 60])\nprint(s.shift(4).tolist())\nWhat prints? What is the first week that gets a forecast?",
+   "reveal": "It prints [nan, nan, nan, nan, 10.0, 20.0]. shift(4) moves every value down four rows. The first forecast is for row 5 (index 4), and it is the value from four rows earlier, 10."
+  },
+  "explain": [
+   {
+    "h": "Why a baseline comes first",
+    "p": [
+     "A forecast of 104 referrals next week means nothing alone. Is that good? Compared with what?",
+     "A baseline is the simplest sensible forecast. You build it first. Any model you build later has to beat it, on the same weeks. If it does not, the model is not worth its cost.",
+     "In NHS capacity work a baseline is also something a manager can understand: 'we expect the same as last week'."
+    ]
+   },
+   {
+    "h": "Naive: the last value",
+    "p": [
+     "Forecast this week = last week. In pandas: df['x'].shift(1).",
+     "It is hard to beat when the numbers wander with no pattern. It reacts to every wobble, so one odd week spoils the next forecast."
+    ]
+   },
+   {
+    "h": "Moving average: the last few weeks",
+    "p": [
+     "Forecast this week = the mean of the last n weeks. In pandas: df['x'].shift(1).rolling(3).mean().",
+     "It smooths the wobble. The cost is lag: after a real jump it takes n weeks to catch up.",
+     "The shift(1) is the whole point. Without it the week itself is in the average (lesson 3.5)."
+    ]
+   },
+   {
+    "h": "Seasonal naive: same point in the last cycle",
+    "p": [
+     "If the numbers repeat in a cycle, forecast this week = the same week one cycle ago. df['x'].shift(4) for a 4-week cycle. df['x'].shift(52) for a yearly pattern in weekly data.",
+     "It needs at least one full cycle of history before it can forecast anything. With 78 weeks of data and a 52-week cycle, you get forecasts for the last 26 weeks only. shift(52) on 40 weeks gives all NaN.",
+     "Which baseline wins depends on the data. Run all three and look."
+    ]
+   },
+   {
+    "h": "The leak test",
+    "p": [
+     "A good habit. Change this week's real number to 9999 and rebuild the forecast. If this week's forecast changes, it used this week's answer. It peeked.",
+     "A fair forecast does not move. A rolling average without shift does move. The example shows both.",
+     "Run this test any time you are unsure. It takes two lines and it has caught real mistakes."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Three baselines, then the leak test",
+   "code": "import io\nimport pandas as pd\n\ntext = \"\"\"wk,referrals\n1,100\n2,120\n3,90\n4,110\n5,104\n6,126\n7,94\n8,116\n9,108\n10,130\n11,98\n12,120\n\"\"\"\ndf = pd.read_csv(io.StringIO(text))\n\ndf[\"naive\"] = df[\"referrals\"].shift(1)\ndf[\"avg3\"] = df[\"referrals\"].shift(1).rolling(3).mean()\ndf[\"seasonal\"] = df[\"referrals\"].shift(4)\nprint(df.round(1))\n\n# leak test: change this week's real number. A fair forecast for this week must not move.\ns = df[\"referrals\"].copy()\ns.iloc[-1] = 9999\nprint(\"with shift, forecast unchanged:\", df[\"avg3\"].iloc[-1] == s.shift(1).rolling(3).mean().iloc[-1])\nprint(\"without shift, forecast unchanged:\", df[\"referrals\"].rolling(3).mean().iloc[-1] == s.rolling(3).mean().iloc[-1])",
+   "output": "    wk  referrals  naive   avg3  seasonal\n0    1        100    NaN    NaN       NaN\n1    2        120  100.0    NaN       NaN\n2    3         90  120.0    NaN       NaN\n3    4        110   90.0  103.3       NaN\n4    5        104  110.0  106.7     100.0\n5    6        126  104.0  101.3     120.0\n6    7         94  126.0  113.3      90.0\n7    8        116   94.0  108.0     110.0\n8    9        108  116.0  112.0     104.0\n9   10        130  108.0  106.0     126.0\n10  11         98  130.0  118.0      94.0\n11  12        120   98.0  112.0     116.0\nwith shift, forecast unchanged: True\nwithout shift, forecast unchanged: False"
+  },
+  "qa": {
+   "q": "You have 30 weeks of weekly data and a yearly pattern. You build\ndf[\"seasonal\"] = df[\"x\"].shift(52)\nWhat do you get? What should you do?",
+   "a": "Every value is NaN: there is no week 52 weeks earlier for any row. You need more than 52 weeks of history. With 30 weeks, use a shorter cycle if one exists (for example 4) or fall back to the naive and moving-average baselines."
+  },
+  "build": {
+   "task": "From a blank page: read the text below. Make two columns: naive (last week) and seasonal (4 weeks ago). Keep only the rows where both exist. Print how many rows that is, then the mean absolute miss of each, rounded to 2 places.\n\nwk,n / 1,50 / 2,62 / 3,45 / 4,58 / 5,52 / 6,64 / 7,47 / 8,60 / 9,54 / 10,66",
+   "hint": "d['n'].shift(1) and d['n'].shift(4). Then t = d.dropna(). Then (t['n'] - t['naive']).abs().mean().round(2).",
+   "check": "6 rows. Naive: 11.0. Seasonal: 2.0. The data repeats every 4 weeks, so the seasonal baseline is far better here."
+  },
+  "teach": "Explain in 5 sentences what a baseline is, and why you build one before any model.",
+  "mistakes": [
+   "Forecasting with rolling(n).mean() but no shift(1). The week is in its own forecast. Run the leak test.",
+   "Using shift(-4). A negative shift brings the FUTURE into the row. It looks brilliant and is useless.",
+   "Using a seasonal cycle longer than the history. You get all NaN.",
+   "Never writing down the baseline's score. Without it a model's score means nothing."
+  ],
+  "selfCheck": [
+   {
+    "q": "What is a baseline?",
+    "a": "The simplest sensible forecast. A model has to beat it to be worth using."
+   },
+   {
+    "q": "Which pandas line gives 'the same week one 4-week cycle ago'?",
+    "a": "df['x'].shift(4)."
+   },
+   {
+    "q": "How does the leak test work?",
+    "a": "Change this week's real number to something huge and rebuild the forecast. If this week's forecast changes, it peeked."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. Two baselines",
+    "task": "TEXT is weekly counts. Read it. Print the naive forecast (last week) as a list, then the forecast from the mean of the 2 weeks before each week as a list.",
+    "hint": "d['n'].shift(1).tolist(). For the second: d['n'].shift(1).rolling(2).mean().tolist().",
+    "setup": "TEXT = \"wk,n\\n1,50\\n2,62\\n3,45\\n4,58\\n5,52\\n6,64\\n7,47\\n8,60\\n9,54\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nprint(d[\"n\"].shift(1).tolist())\nprint(d[\"n\"].shift(1).rolling(2).mean().tolist())",
+    "output": "[nan, 50.0, 62.0, 45.0, 58.0, 52.0, 64.0, 47.0, 60.0]\n[nan, nan, 56.0, 53.5, 51.5, 55.0, 58.0, 55.5, 53.5]",
+    "lang": "python"
+   },
+   {
+    "title": "B. The forecast from the future",
+    "task": "This is meant to be 'the same week one 4-week cycle ago'. It is the value from 4 weeks LATER. Say why. Fix it.",
+    "hint": "A negative shift brings later rows up. Use shift(4).",
+    "setup": "TEXT = \"wk,n\\n1,50\\n2,62\\n3,45\\n4,58\\n5,52\\n6,64\\n7,47\\n8,60\\n9,54\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"seasonal\"] = d[\"n\"].shift(4)\nprint(d[\"seasonal\"].tolist())",
+    "output": "[nan, nan, nan, nan, 50.0, 62.0, 45.0, 58.0, 52.0]",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"seasonal\"] = d[\"n\"].shift(-4)\nprint(d[\"seasonal\"].tolist())",
+    "brokenOutput": "[52.0, 64.0, 47.0, 60.0, 54.0, nan, nan, nan, nan]"
+   },
+   {
+    "title": "C. All NaN",
+    "task": "This prints nan. Say why. Then fix it so it prints a number, using the 4-week cycle that this data has.",
+    "hint": "There are only 9 rows. No row has a value 52 rows earlier. Use shift(4).",
+    "setup": "TEXT = \"wk,n\\n1,50\\n2,62\\n3,45\\n4,58\\n5,52\\n6,64\\n7,47\\n8,60\\n9,54\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"seasonal\"] = d[\"n\"].shift(4)\nprint((d[\"n\"] - d[\"seasonal\"]).abs().mean())",
+    "output": "2.0",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"seasonal\"] = d[\"n\"].shift(52)\nprint((d[\"n\"] - d[\"seasonal\"]).abs().mean())",
+    "brokenOutput": "nan"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   },
+   {
+    "id": "pd-basics",
+    "title": "DataFrames and Series",
+    "no": "3.1"
+   },
+   {
+    "id": "pd-window",
+    "title": "rolling, shift, rank and cumsum",
+    "no": "3.5"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.6",
+  "num": 26
+ },
+ {
+  "id": "fc-backtest",
+  "track": "Python",
+  "title": "Backtesting and error measures",
+  "minutes": 50,
+  "summary": "Score a forecast fairly: cut by time, score every method on the same weeks, read MAE and bias, and know why percentage error can mislead.",
+  "picture": {
+   "svg": "<svg viewBox=\"0 0 520 192\" role=\"img\" aria-label=\"Twelve weeks in a row. The first eight are history. The last four are the test.\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"m3g\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path class=\"mk\" d=\"M0 0 L10 5 L0 10 z\"/></marker></defs><text class=\"tx tb\" x=\"0\" y=\"16\" text-anchor=\"start\" font-size=\"12\">Backtest: pretend it is earlier, forecast, then compare</text><rect class=\"bx\" x=\"0\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"19\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">1</text><rect class=\"bx\" x=\"42\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"61\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">2</text><rect class=\"bx\" x=\"84\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"103\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">3</text><rect class=\"bx\" x=\"126\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"145\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">4</text><rect class=\"bx\" x=\"168\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"187\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">5</text><rect class=\"bx\" x=\"210\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"229\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">6</text><rect class=\"bx\" x=\"252\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"271\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">7</text><rect class=\"bx\" x=\"294\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"313\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">8</text><rect class=\"bxg\" x=\"336\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"355\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">9</text><rect class=\"bxg\" x=\"378\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"397\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">10</text><rect class=\"bxg\" x=\"420\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"439\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">11</text><rect class=\"bxg\" x=\"462\" y=\"30\" width=\"38\" height=\"26\" rx=\"8\"/><text class=\"tx\" x=\"481\" y=\"48\" text-anchor=\"middle\" font-size=\"11\">12</text><line class=\"ln\" x1=\"334\" y1=\"24\" x2=\"334\" y2=\"64\"/><text class=\"tx tm\" x=\"0\" y=\"80\" text-anchor=\"start\" font-size=\"11\">train / history (weeks 1 to 8)</text><text class=\"tx tg\" x=\"336\" y=\"80\" text-anchor=\"start\" font-size=\"11\">test (weeks 9 to 12)</text><text class=\"tx tb\" x=\"0\" y=\"112\" text-anchor=\"start\" font-size=\"12\">1. Cut by time. The test weeks are the LAST ones. Never shuffle.</text><text class=\"tx tb\" x=\"0\" y=\"134\" text-anchor=\"start\" font-size=\"12\">2. For each test week, forecast using only weeks before it.</text><text class=\"tx tb\" x=\"0\" y=\"156\" text-anchor=\"start\" font-size=\"12\">3. Score: MAE = average size of the miss, in referrals.</text><text class=\"tx tb\" x=\"0\" y=\"178\" text-anchor=\"start\" font-size=\"12\">4. Compare with the baseline, on the same weeks.</text></svg>",
+   "caption": "Cut by time. Forecast each test week from earlier weeks only. Score. Compare with the baseline."
+  },
+  "predict": {
+   "q": "import pandas as pd\nactual = pd.Series([100, 120, 90])\nforecast = pd.Series([110, 100, 85])\nprint((forecast - actual).abs().mean())\nprint((forecast - actual).mean())\nWhat prints? What does each number tell you?",
+   "reveal": "It prints 11.666666666666666 and then -5.0. The misses are 10, 20 and 5, so the average size of the miss (MAE) is about 11.7. The signed errors are +10, -20 and -5, so the bias is -5.0: on average the forecast was 5 too low."
+  },
+  "explain": [
+   {
+    "h": "What a backtest is",
+    "p": [
+     "You cannot wait a year to see if a forecast works. A backtest pretends it is an earlier date. For each past week, forecast it using only the weeks before it, then compare with what really happened.",
+     "The simple baselines in lesson 3.6 are already honest backtests: each week's forecast uses only earlier rows.",
+     "The test weeks must be the LAST ones in time. Never pick them at random. Random picks let the model see the future around the test week."
+    ]
+   },
+   {
+    "h": "Cut by time. Do not shuffle",
+    "p": [
+     "history = df.iloc[:8] is the first eight rows. hold = df.iloc[8:] is the rest. Sort by date first.",
+     "scikit-learn's train_test_split shuffles by default. For time series, pass shuffle=False. The last rows then become the test set.",
+     "Say how many weeks you tested. Four weeks is a weak test: one odd week moves the answer a lot. More weeks make a fairer test."
+    ]
+   },
+   {
+    "h": "MAE: the average size of the miss",
+    "p": [
+     "MAE is the mean absolute error: (forecast - actual).abs().mean(). It is in the same units as the data. 'Off by about 4.5 referrals a week' is something a manager understands.",
+     "Lower is better. It treats a miss of 20 as twice as bad as a miss of 10."
+    ]
+   },
+   {
+    "h": "Bias: which way you miss",
+    "p": [
+     "Bias is the mean signed error: (forecast - actual).mean(). Negative means the forecast is usually below what happened (under-forecasting). Positive means it is usually above.",
+     "Two forecasts can have the same MAE and a different bias. For capacity planning, under-forecasting is often the costly side, so always print bias next to MAE."
+    ]
+   },
+   {
+    "h": "Score every method on the same weeks",
+    "p": [
+     "Seasonal naive has no forecast for the first weeks. Naive does. If you average each method's errors over its own rows, they are scored on different weeks and the comparison is unfair.",
+     "Drop the rows where any forecast is missing first: test = df.dropna(). Then score all methods on test.",
+     "Report the comparison as a small table: method, MAE, bias. The baseline is always a row in it."
+    ]
+   },
+   {
+    "h": "The percentage error trap",
+    "p": [
+     "Percentage error divides by the real number. A miss of 2 when the real value is 2 is 100%. A miss of 10 when the real value is 100 is 10%. The mean of those is 55%, but the average miss is 6 referrals.",
+     "If a real value is 0, you divide by zero and get inf.",
+     "Prefer MAE and bias. If you must use a percentage, say so and check for small or zero values first."
+    ]
+   }
+  ],
+  "example": {
+   "title": "Same rows, MAE and bias, the unfair way, a time split, and a percentage trap",
+   "code": "import io\nimport pandas as pd\n\ntext = \"\"\"wk,referrals\n1,100\n2,120\n3,90\n4,110\n5,104\n6,126\n7,94\n8,116\n9,108\n10,130\n11,98\n12,120\n\"\"\"\ndf = pd.read_csv(io.StringIO(text))\ndf[\"naive\"] = df[\"referrals\"].shift(1)\ndf[\"avg3\"] = df[\"referrals\"].shift(1).rolling(3).mean()\ndf[\"seasonal\"] = df[\"referrals\"].shift(4)\n\n# score every method on the same weeks: only rows where all forecasts exist\ntest = df.dropna()\nprint(len(test), test[\"wk\"].min())\nrows = []\nfor col in [\"naive\", \"avg3\", \"seasonal\"]:\n    err = test[col] - test[\"referrals\"]\n    rows.append({\"method\": col, \"mae\": err.abs().mean(), \"bias\": err.mean()})\nprint(pd.DataFrame(rows).round(2))\n\n# the trap: each method scored on its own rows\nfor col in [\"naive\", \"avg3\", \"seasonal\"]:\n    print(col, (df[\"referrals\"] - df[col]).abs().mean().round(2))\n\n# a time split: first 8 weeks are history, last 4 are the test\nhistory = df.iloc[:8]\nhold = df.iloc[8:]\nprint(len(history), len(hold), hold[\"wk\"].tolist())\nprint((hold[\"referrals\"] - history[\"referrals\"].mean()).abs().mean())\nprint((hold[\"referrals\"] - hold[\"seasonal\"]).abs().mean())\n\n# percentage error: a miss of 2 on a small number looks huge\na = pd.Series([2, 100])\nf = pd.Series([4, 110])\nprint((a - f).abs().mean(), round(((a - f).abs() / a).mean() * 100, 1))",
+   "output": "8 5\n     method    mae  bias\n0     naive  20.75 -1.25\n1      avg3  13.83 -2.33\n2  seasonal   4.50 -4.50\nnaive 21.45\navg3 13.04\nseasonal 4.5\n8 4 [9, 10, 11, 12]\n11.25\n4.0\n6.0 55.0"
+  },
+  "qa": {
+   "q": "Method A has MAE 10 on 40 weeks. Method B has MAE 8 on 12 weeks.\nIs B better? What would you check first?",
+   "a": "You cannot tell. They were scored on different weeks and different amounts of data. Score both on the same weeks (the rows where both have a forecast) and see how many weeks that is. Then compare, and look at bias as well."
+  },
+  "build": {
+   "task": "From a blank page: read the text below. Make a naive forecast (last week) and a 3-week moving-average forecast (the 3 weeks before). Keep only the rows where both exist. Print how many rows you scored, then a table with one row per method and the columns method, mae and bias (forecast minus actual), rounded to 2 places. Then print which method has the lower MAE.\n\nwk,n / 1,50 / 2,54 / 3,52 / 4,60 / 5,58 / 6,62 / 7,57 / 8,65 / 9,61 / 10,68",
+   "hint": "Build both columns with shift. t = d.dropna(). Loop over ['naive', 'avg3']; err = t[col] - t['n']; append {'method': col, 'mae': err.abs().mean(), 'bias': err.mean()} to a list; pd.DataFrame(rows).round(2). Compare with idxmin on the mae column.",
+   "check": "7 rows scored. The table is naive 5.43 and -2.29, then avg3 4.62 and -3.67. The 3-week average has the lower MAE, so print avg3. Both biases are negative: the numbers drift upwards, so both forecasts are a little low, and the average is lower still because it lags."
+  },
+  "teach": "Explain in 5 sentences why you score every method on the same weeks, and why you print bias as well as MAE.",
+  "mistakes": [
+   "Scoring each method on its own rows. The comparison is unfair.",
+   "Picking test weeks at random (or train_test_split with its default shuffle). The model sees the future.",
+   "Reporting a percentage error without checking for small or zero real values.",
+   "Reporting a score with no baseline beside it. 'MAE 6' means nothing alone."
+  ],
+  "selfCheck": [
+   {
+    "q": "What does MAE measure?",
+    "a": "The average size of the miss, in the same units as the data."
+   },
+   {
+    "q": "What does a negative bias mean?",
+    "a": "The forecast is usually below the real value: it under-forecasts."
+   },
+   {
+    "q": "Why must the test weeks be the last ones in time?",
+    "a": "Random test weeks let the forecast use data from after the week being forecast. In real life you never have that."
+   }
+  ],
+  "mixed": [
+   {
+    "title": "A. MAE and bias",
+    "task": "TEXT is weekly counts. Make a naive forecast (last week). Keep the rows that have one. Print the MAE and the bias (forecast minus actual), each rounded to 2 places.",
+    "hint": "err = t['naive'] - t['n']. MAE is err.abs().mean(). Bias is err.mean().",
+    "setup": "TEXT = \"wk,n\\n1,50\\n2,62\\n3,45\\n4,58\\n5,52\\n6,64\\n7,47\\n8,60\\n9,54\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"naive\"] = d[\"n\"].shift(1)\nt = d.dropna()\nerr = t[\"naive\"] - t[\"n\"]\nprint(err.abs().mean().round(2))\nprint(err.mean().round(2))",
+    "output": "12.0\n-0.5",
+    "lang": "python"
+   },
+   {
+    "title": "B. Not the same weeks",
+    "task": "This compares naive and seasonal. The seasonal forecast starts four weeks later, so they are scored on different weeks. Say why that is unfair. Fix it so both are scored on the same weeks.",
+    "hint": "Make t = d.dropna() first and score both on t.",
+    "setup": "TEXT = \"wk,n\\n1,50\\n2,62\\n3,45\\n4,58\\n5,52\\n6,64\\n7,47\\n8,60\\n9,54\\n\"\n",
+    "sql": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"naive\"] = d[\"n\"].shift(1)\nd[\"seasonal\"] = d[\"n\"].shift(4)\nt = d.dropna()\nfor col in [\"naive\", \"seasonal\"]:\n    print(col, (t[\"n\"] - t[col]).abs().mean().round(2))",
+    "output": "naive 10.8\nseasonal 2.0",
+    "lang": "python",
+    "broken": "import io\nimport pandas as pd\n\nd = pd.read_csv(io.StringIO(TEXT))\nd[\"naive\"] = d[\"n\"].shift(1)\nd[\"seasonal\"] = d[\"n\"].shift(4)\nfor col in [\"naive\", \"seasonal\"]:\n    print(col, (d[\"n\"] - d[col]).abs().mean().round(2))",
+    "brokenOutput": "naive 12.0\nseasonal 2.0"
+   },
+   {
+    "title": "C. A percentage that means nothing",
+    "task": "This prints inf. Say why. Fix it by reporting the average miss in the real units instead.",
+    "hint": "The first real value is 0, so you divide by zero. MAE needs no division.",
+    "setup": "",
+    "sql": "import pandas as pd\n\nactual = pd.Series([0, 40, 50])\nforecast = pd.Series([3, 38, 55])\nprint((forecast - actual).abs().mean())",
+    "output": "3.3333333333333335",
+    "lang": "python",
+    "broken": "import pandas as pd\n\nactual = pd.Series([0, 40, 50])\nforecast = pd.Series([3, 38, 55])\nprint(((forecast - actual).abs() / actual).mean() * 100)",
+    "brokenOutput": "inf"
+   }
+  ],
+  "prereqs": [
+   {
+    "id": "py-types",
+    "title": "Values, types and variables",
+    "no": "1.1"
+   },
+   {
+    "id": "py-strings",
+    "title": "Strings and f-strings",
+    "no": "1.2"
+   },
+   {
+    "id": "py-lists-tuples",
+    "title": "Lists and tuples",
+    "no": "1.3"
+   },
+   {
+    "id": "py-control",
+    "title": "Conditions and loops",
+    "no": "1.4"
+   },
+   {
+    "id": "py-dict-count",
+    "title": "Count items with a dictionary",
+    "no": "1.6"
+   },
+   {
+    "id": "py-files",
+    "title": "Files: text, CSV and JSON",
+    "no": "1.9"
+   },
+   {
+    "id": "pd-basics",
+    "title": "DataFrames and Series",
+    "no": "3.1"
+   },
+   {
+    "id": "pd-window",
+    "title": "rolling, shift, rank and cumsum",
+    "no": "3.5"
+   },
+   {
+    "id": "fc-baselines",
+    "title": "Forecast baselines",
+    "no": "3.6"
+   }
+  ],
+  "assumed": [],
+  "module": "M7",
+  "lessonNo": "3.7",
+  "num": 27
+ },
+ {
   "id": "sql-where-having",
   "track": "SQL",
   "title": "WHERE, HAVING and the logical order",
@@ -4151,8 +5251,8 @@ window.TOPICS = [
    }
   ],
   "module": "M3",
-  "lessonNo": "3.8",
-  "num": 21
+  "lessonNo": "5.7",
+  "num": 28
  },
  {
   "id": "sql-window-frames",
@@ -4274,8 +5374,8 @@ window.TOPICS = [
    }
   ],
   "module": "M3",
-  "lessonNo": "3.10",
-  "num": 22
+  "lessonNo": "5.9",
+  "num": 29
  },
  {
   "id": "sql-percentile",
@@ -4382,8 +5482,8 @@ window.TOPICS = [
    }
   ],
   "module": "M3",
-  "lessonNo": "3.11",
-  "num": 23
+  "lessonNo": "5.10",
+  "num": 30
  },
  {
   "id": "sql-rollup-grouping",
@@ -4525,8 +5625,8 @@ window.TOPICS = [
    }
   ],
   "module": "M3",
-  "lessonNo": "3.12",
-  "num": 24
+  "lessonNo": "5.11",
+  "num": 31
  },
  {
   "id": "sql-correlated-vs-window",
@@ -4614,7 +5714,7 @@ window.TOPICS = [
    {
     "id": "sql-window-frames",
     "title": "Window frames and LAST_VALUE",
-    "no": "3.10"
+    "no": "5.9"
    }
   ],
   "assumed": [
@@ -4632,7 +5732,7 @@ window.TOPICS = [
    }
   ],
   "module": "M4",
-  "lessonNo": "4.4",
-  "num": 25
+  "lessonNo": "6.4",
+  "num": 32
  }
 ];
